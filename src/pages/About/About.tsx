@@ -1,7 +1,7 @@
-import * as React from 'react'
-import './About.scss';
+import * as React from 'react';
+import styles from './About.module.scss';
 
-export type AboutProps = {}
+export type AboutProps = {};
 
 const About: React.FC<AboutProps> = ({}) => {
   return <div></div>;
