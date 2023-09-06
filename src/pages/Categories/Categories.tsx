@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './Categories.scss';
+import styles from './Categories.module.scss';
 
 export type CategoriesProps = {};
 
