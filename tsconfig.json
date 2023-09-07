@@ -20,10 +20,10 @@
 
     "baseUrl": "src",
     "paths": {
-      "@components": ["components/*"],
-      "@config": ["config/*"],
-      "@styles": ["styles/*"],
-      "@utils": ["utils/*"]
+      "components": ["components"],
+      "config": ["config"],
+      "@styles": ["styles/styles.scss"],
+      "utils": ["utils"]
     }
   },
   "include": ["src"],
