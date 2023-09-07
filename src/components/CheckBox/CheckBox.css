@@ -1,0 +1,32 @@
+.checkbox-label {
+  display: inline-block;
+  position: relative;
+
+  cursor: pointer;
+}
+
+.checkbox-label input[type='checkbox'] {
+  opacity: 0; /* Скрываем оригинальный checkbox */
+  position: absolute;
+}
+.checkbox-custom {
+  width: var(--loader-l, 40px);
+  height: var(--loader-l, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  border-radius: var(--border-radius, 0px);
+  border: 1px solid var(--checkbox-border, #fff);
+  background: var(--checkbox-bg, #fff);
+}
+
+.checkbox-custom:hover {
+  border: 1px solid currentColor;
+}
+
+input[type='checkbox']:disabled + .checkbox-custom {
+  color: var(--checkbox-check-disabled, rgba(0, 0, 0, 0.2));
+  border: 1px solid var(--checkbox-border-disabled, rgba(255, 255, 255, 0));
+  background: var(--checkbox-bg-disabled, rgba(255, 255, 255, 0.5));
+}

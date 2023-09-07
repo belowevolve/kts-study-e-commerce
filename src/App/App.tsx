@@ -1,9 +1,10 @@
-import * as React from 'react';
+import * as React from "react";
+import "./App.scss";
 
-import './App.scss';
+import Products from "../pages/Products";
 
 const App = () => {
-  return <div></div>;
+  return <Products></Products>;
 };
 
 export default App;

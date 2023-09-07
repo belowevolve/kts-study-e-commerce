@@ -1,0 +1,55 @@
+/* Colors */
+$brand: #518581;
+$brand-hover: #86aaa7;
+$brand-active: #487773;
+
+$loader-bg: $brand;
+$button-primary-bg: $brand;
+$button-primary-text: #ffffff;
+$button-primary-bg-hover: #86aaa7;
+$button-primary-text-hover: #ffffff;
+$button-primary-bg-disabled: #d9d9d9;
+$button-primary-text-disabled: #ffffff;
+$button-primary-bg-active: #487773;
+$button-primary-text-active: #ffffff;
+$text-primary: #000000;
+$text-secondary: #afadb5;
+$text-accent: $brand;
+$input-text: #000000;
+$input-bg: #ffffff;
+$input-placeholder: #afadb5;
+$input-border: #ffffff;
+$input-bg-focus: #ffffff;
+$input-border-focus: $brand;
+$input-text-focus: #000000;
+$input-bg-disabled: #ffffff;
+$input-border-disabled: #ffffff;
+$input-text-disabled: rgba(0, 0, 0, 0.2);
+$checkbox-bg: #ffffff;
+$checkbox-border: #ffffff;
+$checkbox-bg-hover: #ffffff;
+$checkbox-border-hover: $brand;
+$checkbox-bg-disabled: rgba(255, 255, 255, 0.5);
+$checkbox-border-disabled: #ffffff;
+$checkbox-check: $brand;
+$checkbox-check-hover: $brand;
+$checkbox-check-disabled: rgba(0, 0, 0, 0.2);
+$card-image-bg: #d9d9d9;
+$card-bg: #ffffff;
+$dropdown-options-bg: #ffffff;
+
+$space-xl: 24px;
+$space-l: 20px;
+$space-m: 16px;
+$space-s: 14px;
+$space-xs: 12px;
+$space-xxs: 8px;
+
+$loader-l: 40px;
+$loader-l-margin: 10px;
+$loader-m: 32px;
+$loader-m-margin: 8px;
+$loader-s: 16px;
+$loader-s-margin: 4px;
+
+$shadow-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);

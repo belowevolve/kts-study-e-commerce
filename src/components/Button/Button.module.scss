@@ -1,0 +1,25 @@
+@use "@styles" as *;
+
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: $space-xxs;
+  padding: $space-s $space-l;
+  min-height: 52px;
+  border: 0;
+  background: $brand;
+  color: #fff;
+}
+
+.button:hover:enabled {
+  background: $brand-hover;
+}
+
+.button:active:enabled {
+  background: $brand-active;
+}
+
+.disabled {
+  background: $button-primary-bg-disabled;
+}
