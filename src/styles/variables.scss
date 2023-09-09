@@ -1,9 +1,29 @@
-/* Colors */
 $brand: #518581;
 $brand-hover: #86aaa7;
 $brand-active: #487773;
+$brand-background: #fafafa;
+$brand-background: #d9d9d9;
+
+$navbar-line: #f3f3f3;
+$navbar-bg: #fff;
+$navbar-height: 90px;
+$navbar-padding: 100px;
+
+$font-size-button: 18px;
+$line-height-button: 18px;
+$font-size-title: 44px;
+$line-height-title: 48px;
+$font-size-p20: 20px;
+$line-height-p20: 24px;
+$font-size-p18: 18px;
+$line-height-p18: 22px;
+$font-size-p16: 16px;
+$line-height-p16: 20px;
+$font-size-p14: 14px;
+$line-height-p14: 18px;
 
 $loader-bg: $brand;
+
 $button-primary-bg: $brand;
 $button-primary-text: #ffffff;
 $button-primary-bg-hover: #86aaa7;
@@ -12,6 +32,7 @@ $button-primary-bg-disabled: #d9d9d9;
 $button-primary-text-disabled: #ffffff;
 $button-primary-bg-active: #487773;
 $button-primary-text-active: #ffffff;
+
 $text-primary: #000000;
 $text-secondary: #afadb5;
 $text-accent: $brand;
@@ -38,10 +59,11 @@ $card-image-bg: #d9d9d9;
 $card-bg: #ffffff;
 $dropdown-options-bg: #ffffff;
 
-$space-xl: 24px;
-$space-l: 20px;
-$space-m: 16px;
-$space-s: 14px;
+$space-xl: 48px;
+$space-l: 32px;
+$space-m: 24px;
+
+$space-s: 16px;
 $space-xs: 12px;
 $space-xxs: 8px;
 
@@ -52,4 +74,7 @@ $loader-m-margin: 8px;
 $loader-s: 16px;
 $loader-s-margin: 4px;
 
+$border-radius: 0px;
+
 $shadow-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+$shadow-nav: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);

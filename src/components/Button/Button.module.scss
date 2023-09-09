@@ -1,15 +1,17 @@
-@use "@styles" as *;
+@use "@variables" as *;
+@use "@mixins" as *;
 
-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: $space-xxs;
-  padding: $space-s $space-l;
+.button {
+  padding: $space-s;
   min-height: 52px;
   border: 0;
   background: $brand;
+  white-space: nowrap;
   color: #fff;
+  transition: 0.3s ease padding;
+  @include breakpoint(md) {
+    padding: $space-s $space-l;
+  }
 }
 
 .button:hover:enabled {

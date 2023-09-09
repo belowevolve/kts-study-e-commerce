@@ -1,7 +1,7 @@
 import * as React from "react";
 import Text from "../Text";
 
-import card from "./Card.module.scss";
+import styles from "./Card.module.scss";
 export type CardProps = {
   /** Дополнительный classname */
   className?: string;
@@ -32,37 +32,50 @@ const Card: React.FC<CardProps> = ({
   actionSlot,
 }) => {
   return (
-    <div className={`${card.card} ${className ?? ""}`} onClick={onClick}>
-      <div className={card.header}>
-        <div className={card.cardImgBackground}></div>
-        <img className={card.cardImg} src={image} alt="card" />
+    <div className={`${styles.card} ${className ?? ""}`} onClick={onClick}>
+      <div className={styles.card__header}>
+        <img className={styles.card__cardImg} src={image} alt="card" />
       </div>
 
-      <div className={card.body}>
-        <div className={card.frame1}>
-          {captionSlot && (
-            <Text view="p-14" color="secondary" weight="medium">
-              {captionSlot}
-            </Text>
-          )}
-
-          <Text view="p-20" weight="medium" color="primary" maxLines={2}>
-            {title}
+      <div className={styles.card__body}>
+        {captionSlot && (
+          <Text
+            className={styles.card__caption}
+            view="p-14"
+            color="secondary"
+            weight="medium"
+          >
+            {captionSlot}
           </Text>
+        )}
 
-          <Text view="p-16" color="secondary" maxLines={3}>
-            {subtitle}
-          </Text>
-        </div>
+        <Text
+          className={styles.card__title}
+          view="p-20"
+          weight="medium"
+          color="primary"
+          maxLines={2}
+        >
+          {title}
+        </Text>
 
-        <div className={card.frame2}>
+        <Text
+          className={styles.card__subtitle}
+          view="p-16"
+          color="secondary"
+          maxLines={3}
+        >
+          {subtitle}
+        </Text>
+
+        <div className={styles.card__footer}>
           {contentSlot && (
             <Text view="p-18" color="primary" weight="bold">
               {contentSlot}
             </Text>
           )}
 
-          <div>{actionSlot}</div>
+          <div className={styles.card__action}>{actionSlot}</div>
         </div>
       </div>
     </div>

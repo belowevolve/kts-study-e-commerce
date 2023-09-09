@@ -22,14 +22,13 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const buttonClasses = cn(
-    button.button,
-    className,
-    props.disabled === true && button.disabled
-  );
   return (
     <button
-      className={buttonClasses}
+      className={cn(
+        button.button,
+        className,
+        props.disabled === true && button.disabled
+      )}
       {...props}
       disabled={props.disabled || loading}
     >
