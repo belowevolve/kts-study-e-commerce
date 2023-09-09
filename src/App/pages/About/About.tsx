@@ -1,6 +1,6 @@
 import * as React from "react";
 import PageLabel from "components/PageLabel";
-import styles from "./About.module.scss";
+// import styles from "./About.module.scss";
 
 export type AboutProps = {};
 

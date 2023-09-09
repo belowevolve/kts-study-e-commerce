@@ -1,6 +1,6 @@
 import * as React from "react";
 import PageLabel from "components/PageLabel";
-import styles from "./Cart.module.scss";
+// import styles from "./Cart.module.scss";
 
 export type CartProps = {};
 

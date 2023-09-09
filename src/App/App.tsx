@@ -9,7 +9,7 @@ import Categories from "./pages/Categories";
 import Products from "./pages/Products";
 import User from "./pages/User";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Navbar />
