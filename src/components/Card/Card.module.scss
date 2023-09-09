@@ -7,7 +7,7 @@
   background: $card-bg;
   border-radius: $border-radius;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.2s ease-in-out;
   &:hover {
     box-shadow: $shadow-box-shadow;
   }
@@ -58,5 +58,18 @@
   &__action {
     margin-left: auto;
     padding-left: $space-xxs;
+  }
+
+  @media (max-width: 550px) {
+    .card__footer {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card__action {
+      margin: auto;
+      margin-top: $space-xxs;
+      padding-left: 0;
+    }
   }
 }

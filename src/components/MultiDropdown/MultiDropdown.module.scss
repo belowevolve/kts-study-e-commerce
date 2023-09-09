@@ -2,8 +2,10 @@
 
 .dropdown {
   position: relative;
+  min-width: 300px;
   &__options {
     width: 100%;
+
     position: absolute;
     top: calc(100% + $space-xxs);
     left: 0;
