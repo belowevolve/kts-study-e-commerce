@@ -1,0 +1,33 @@
+@use "@variables" as *;
+
+.dropdown {
+  position: relative;
+  &__options {
+    width: 100%;
+    position: absolute;
+    top: calc(100% + $space-xxs);
+    left: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: $border-radius;
+    background: $dropdown-options-bg;
+
+    box-shadow: $shadow-box-shadow;
+  }
+
+  &__option {
+    width: 100%;
+    padding: $space-s $space-xs;
+
+    z-index: 1;
+    &:hover {
+      color: $text-secondary;
+    }
+
+    &.selected {
+      color: $text-accent;
+    }
+  }
+}

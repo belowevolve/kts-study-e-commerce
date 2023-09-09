@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "types": ["vite-plugin-svgr/client"],
 
     "strict": true,
     "noUnusedLocals": true,
@@ -22,8 +23,10 @@
     "paths": {
       "components": ["components"],
       "config": ["config"],
-      "@styles": ["styles/styles.scss"],
-      "utils": ["utils"]
+      "utils": ["utils"],
+      "@variables": ["styles/variables.scss"],
+      "@mixins": ["styles/mixins.scss"],
+      "styles": ["styles"]
     }
   },
   "include": ["src"],
