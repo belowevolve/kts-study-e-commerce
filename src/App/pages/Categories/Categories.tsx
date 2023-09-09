@@ -1,6 +1,6 @@
 import * as React from "react";
 import PageLabel from "components/PageLabel";
-import styles from "./Categories.module.scss";
+// import styles from "./Categories.module.scss";
 
 export type CategoriesProps = {};
 

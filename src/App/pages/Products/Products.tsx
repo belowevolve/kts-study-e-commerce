@@ -12,9 +12,8 @@ import useProducts from "./Hooks/useProducts";
 
 import styles from "./Products.module.scss";
 
-const Products = () => {
+const Products: React.FC = () => {
   const { products } = useProducts();
-  console.log(products);
   return (
     <>
       <PageLabel

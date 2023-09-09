@@ -1,6 +1,6 @@
 import * as React from "react";
 import PageLabel from "components/PageLabel";
-import styles from "./User.module.scss";
+// import styles from "./User.module.scss";
 
 export type UserProps = {};
 
