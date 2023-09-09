@@ -47,8 +47,10 @@ to see our old products please enter the name of the item"
           ></MultiDropdown>
         </div>
         <div className={styles.total}>
-          <Text view="title">Total products</Text>
-          <Text view="p-20" color="accent">
+          <Text view="title" className={styles.total__text}>
+            Total products
+          </Text>
+          <Text view="p-20" color="accent" weight="bold">
             soon
           </Text>
         </div>

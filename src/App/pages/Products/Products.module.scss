@@ -3,7 +3,7 @@
 
 .products_page {
   max-width: 1920px;
-  padding: 0 $space-m;
+  padding: 0 $space-s;
   margin: $space-xl auto;
   transition: 0.3s ease padding;
   @include breakpoint(md) {
@@ -32,12 +32,14 @@
   display: flex;
   align-items: center;
   gap: $space-m;
+  &__text {
+    font-size: 32px;
+  }
 }
 
 .products {
   margin-top: $space-l;
   display: grid;
-
   justify-content: space-between;
   transition: grid-template-columns 0.3s ease;
   grid-template-columns: repeat(3, minmax(0, 360px));
