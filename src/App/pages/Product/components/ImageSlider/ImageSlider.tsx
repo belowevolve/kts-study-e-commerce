@@ -14,6 +14,9 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
         showPlayButton={false}
         showBullets={true}
         showNav={window.matchMedia("(max-width: 900px)").matches ? false : true}
+        showFullscreenButton={
+          window.matchMedia("(max-width: 900px)").matches ? false : true
+        }
         items={images}
         infinite={false}
         slideDuration={200}

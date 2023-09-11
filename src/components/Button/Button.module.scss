@@ -7,7 +7,7 @@
   border: 0;
   background: $brand;
   white-space: nowrap;
-  color: #fff;
+  color: $button-primary-text;
   transition: 0.3s ease padding;
   @include breakpoint(md) {
     padding: $space-s $space-l;

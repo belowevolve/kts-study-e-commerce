@@ -57,21 +57,25 @@ const Product: React.FC = () => {
         <Text view="title" className={styles.related__text}>
           Related Items
         </Text>
-        <div className={styles.related__recs}>
-          {recs?.map((product) => (
-            <Card
-              key={product.id}
-              onClick={() => navigate(`/products/${product.id}`)}
-              captionSlot={product.category}
-              title={product.title}
-              subtitle={product.description}
-              contentSlot={`${product.price} $`}
-              image={product.images[0]}
-              actionSlot={<Button>Add to cart</Button>}
-              className={styles.related__recs__product}
-            ></Card>
-          ))}
-        </div>
+        {recsLoading ? (
+          <div className={styles.loading}>loading</div>
+        ) : (
+          <div className={styles.related__recs}>
+            {recs?.map((product) => (
+              <Card
+                key={product.id}
+                onClick={() => navigate(`/products/${product.id}`)}
+                captionSlot={product.category}
+                title={product.title}
+                subtitle={product.description}
+                contentSlot={`${product.price} $`}
+                image={product.images[0]}
+                actionSlot={<Button>Add to cart</Button>}
+                className={styles.related__recs__product}
+              ></Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

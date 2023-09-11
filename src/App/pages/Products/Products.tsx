@@ -35,6 +35,7 @@ to see our old products please enter the name of the item"
             <Button>Find Now</Button>
           </div>
           <MultiDropdown
+            className={styles.multiDropdown}
             options={[
               { key: "msk", value: "Москва" },
               { key: "spb", value: "Санкт-Петербург" },
