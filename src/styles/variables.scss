@@ -2,7 +2,7 @@ $brand: #518581;
 $brand-hover: #86aaa7;
 $brand-active: #487773;
 $brand-background: #fafafa;
-$brand-background: #d9d9d9;
+// $brand-background: #d9d9d9;
 
 $navbar-line: #f3f3f3;
 $navbar-bg: #fff;
@@ -13,6 +13,7 @@ $font-size-button: 18px;
 $line-height-button: 18px;
 $font-size-title: 44px;
 $line-height-title: 48px;
+$font-size-sub-title: 32px;
 $font-size-p20: 20px;
 $line-height-p20: 24px;
 $font-size-p18: 18px;
@@ -32,7 +33,9 @@ $button-primary-bg-disabled: #d9d9d9;
 $button-primary-text-disabled: #ffffff;
 $button-primary-bg-active: #487773;
 $button-primary-text-active: #ffffff;
-
+$button-border: 1px solid #afadb5;
+$button-add-to-cart-color: white;
+$button-add-to-cart-text: black;
 $text-primary: #000000;
 $text-secondary: #afadb5;
 $text-accent: $brand;
@@ -59,6 +62,11 @@ $card-image-bg: #d9d9d9;
 $card-bg: #ffffff;
 $dropdown-options-bg: #ffffff;
 
+$slider-button: black;
+$slider-button-disabled: rgba(175, 173, 181, 0.2);
+$slider-button-color: white;
+$slider-button-size: 60px;
+
 $space-xl: 48px;
 $space-l: 32px;
 $space-m: 24px;
@@ -66,6 +74,8 @@ $space-m: 24px;
 $space-s: 16px;
 $space-xs: 12px;
 $space-xxs: 8px;
+
+$space-back: 60px;
 
 $loader-l: 40px;
 $loader-l-margin: 10px;

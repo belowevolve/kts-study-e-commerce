@@ -26,7 +26,8 @@
       "utils": ["utils"],
       "@variables": ["styles/variables.scss"],
       "@mixins": ["styles/mixins.scss"],
-      "styles": ["styles"]
+      "styles": ["styles"],
+      "hooks": ["hooks"]
     }
   },
   "include": ["src"],

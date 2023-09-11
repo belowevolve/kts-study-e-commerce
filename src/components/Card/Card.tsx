@@ -22,7 +22,7 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
-  className,
+  className = "",
   image,
   captionSlot,
   title,
@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({
   actionSlot,
 }) => {
   return (
-    <div className={`${styles.card} ${className ?? ""}`} onClick={onClick}>
+    <div className={`${styles.card} ${className}`} onClick={onClick}>
       <div className={styles.card__header}>
         <img className={styles.card__cardImg} src={image} alt="card" />
       </div>
