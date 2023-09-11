@@ -12,6 +12,25 @@ import { ReactComponent as MenuRight } from "styles/svg/menuRight.svg";
 import { ReactComponent as User } from "styles/svg/user.svg";
 import styles from "./Navbar.module.scss";
 
+export type NavbarItemProps = {
+  to: string;
+  text: string;
+  pathName: string;
+};
+
+const NavbarItem: React.FC<NavbarItemProps> = ({ to, text, pathName }) => {
+  const isActive = pathName.includes(to);
+  return (
+    <Link
+      className={cn(styles.nav__item, isActive ? styles.active : "")}
+      to={to}
+    >
+      <Text view="p-18">{text}</Text>
+      <div className={cn(styles.link, isActive ? styles.active : "")}></div>
+    </Link>
+  );
+};
+
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
@@ -20,59 +39,30 @@ const Navbar: React.FC = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar__content}>
-        <div className={styles.logo}>
-          <Logo />
-          <LogoName />
+        <div>
+          <Link to="/" className={styles.logo}>
+            <Logo />
+            <LogoName />
+          </Link>
         </div>
 
         <div>
           <div className={cn(styles.nav, menuOpen ? styles["nav--open"] : "")}>
-            <Link
-              className={cn(
-                styles.nav__item,
-                location.pathname === "/products" ? styles.active : ""
-              )}
+            <NavbarItem
               to="/products"
-            >
-              <Text view="p-18">Products</Text>
-              <div
-                className={cn(
-                  styles.link,
-                  location.pathname === "/products" ? styles.active : ""
-                )}
-              ></div>
-            </Link>
-
-            <Link
-              className={cn(
-                styles.nav__item,
-                location.pathname === "/categories" ? styles.active : ""
-              )}
+              text="Products"
+              pathName={location.pathname}
+            />
+            <NavbarItem
               to="/categories"
-            >
-              <Text view="p-18">Categories</Text>
-              <div
-                className={cn(
-                  styles.link,
-                  location.pathname === "/categories" ? styles.active : ""
-                )}
-              ></div>
-            </Link>
-            <Link
-              className={cn(
-                styles.nav__item,
-                location.pathname === "/about" ? styles.active : ""
-              )}
+              text="Categories"
+              pathName={location.pathname}
+            />
+            <NavbarItem
               to="/about"
-            >
-              <Text view="p-18">About us</Text>
-              <div
-                className={cn(
-                  styles.link,
-                  location.pathname === "/about" ? styles.active : ""
-                )}
-              ></div>
-            </Link>
+              text="About us"
+              pathName={location.pathname}
+            />
           </div>
         </div>
         <div>

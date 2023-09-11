@@ -12,9 +12,9 @@
   &__content {
     max-width: 1920px;
     margin: 0 auto;
-    padding: 0 $space-s;
     border-bottom: 2px solid $navbar-line;
 
+    padding: 0 $space-s;
     transition: 0.3s ease padding;
     @include breakpoint(md) {
       padding: 0 $navbar-padding;
@@ -27,11 +27,6 @@
     & > div {
       flex: 1;
       flex-wrap: nowrap;
-
-      &:nth-child(2) {
-        display: flex;
-        justify-content: center;
-      }
     }
   }
 

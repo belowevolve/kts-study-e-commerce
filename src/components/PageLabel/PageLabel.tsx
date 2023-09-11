@@ -6,15 +6,23 @@ export type PageLabelProps = {
   title: string;
   description: string;
   align?: "start" | "end" | "left" | "right" | "center";
+  margin?: string;
 };
 
 const PageLabel: React.FC<PageLabelProps> = ({
   title,
   description,
   align = "center",
+  margin = "100px auto 0",
 }) => {
   return (
-    <div className={styles.page_label} style={{ textAlign: align }}>
+    <div
+      className={styles.page_label}
+      style={{
+        textAlign: align,
+        margin: margin,
+      }}
+    >
       <Text view="title">{title}</Text>
       <Text view="p-20" color="secondary">
         {description}

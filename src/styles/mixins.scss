@@ -1,5 +1,16 @@
+@use "@variables" as *;
+
 @mixin breakpoint($point) {
   @media (min-width: 1000px) {
     @content;
+  }
+}
+
+@mixin page {
+  max-width: 1920px;
+  padding: 0 $space-s;
+  transition: 0.3s ease padding;
+  @include breakpoint(md) {
+    padding: 0 $navbar-padding;
   }
 }

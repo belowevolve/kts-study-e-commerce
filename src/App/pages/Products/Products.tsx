@@ -1,19 +1,20 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "components/Button";
 import Card from "components/Card";
 import Input from "components/Input";
 import MultiDropdown, { Option } from "components/MultiDropdown";
 import PageLabel from "components/PageLabel";
 import Text from "components/Text";
-
 import { ReactComponent as Cross } from "styles/svg/cross.svg";
 
-import useProducts from "./Hooks/useProducts";
-
+import useFetchProducts from "./hooks/useFetchProducts";
 import styles from "./Products.module.scss";
 
 const Products: React.FC = () => {
-  const { products } = useProducts();
+  const { data: products, loading, error } = useFetchProducts();
+  console.log(products, loading, error);
+  const navigate = useNavigate();
   return (
     <>
       <PageLabel
@@ -39,10 +40,12 @@ to see our old products please enter the name of the item"
               { key: "spb", value: "Санкт-Петербург" },
               { key: "ekb", value: "Екатеринбург" },
             ]}
-            value={[{ key: "msk", value: "Москва" }]}
+            value={[]}
             onChange={() => {}}
             getTitle={(elements: Option[]) =>
-              elements.map((el: Option) => el.key).join()
+              elements.length === 0
+                ? "Choose category"
+                : elements.map((el: Option) => el.key).join()
             }
           ></MultiDropdown>
         </div>
@@ -51,18 +54,19 @@ to see our old products please enter the name of the item"
             Total products
           </Text>
           <Text view="p-20" color="accent" weight="bold">
-            soon
+            {products?.length}
           </Text>
         </div>
         <div className={styles.products}>
-          {products.map((product) => (
+          {products?.map((product) => (
             <Card
               key={product.id}
+              onClick={() => navigate(`/products/${product.id}`)}
               captionSlot={product.category}
               title={product.title}
               subtitle={product.description}
               contentSlot={`${product.price} $`}
-              image={product.image}
+              image={product.images[0]}
               actionSlot={<Button>Add to cart</Button>}
               className={styles.product}
             ></Card>
