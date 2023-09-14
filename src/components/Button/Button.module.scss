@@ -25,3 +25,8 @@
 .disabled {
   background: $button-primary-bg-disabled;
 }
+
+.button__loader {
+  border-color: $button-loader;
+  border-right-color: transparent;
+}

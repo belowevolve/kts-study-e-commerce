@@ -1,6 +1,7 @@
 import * as React from "react";
+import { IconColor } from "components/icons/Icon";
 import Input from "../Input";
-import Text from "../Text";
+import Text, { TextView } from "../Text";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import styles from "./MultiDropdown.module.scss";
 
@@ -96,7 +97,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         onChange={(value) => setSearchTerm(value)}
         disabled={disabled}
         placeholder={getTitle(value)}
-        afterSlot={<ArrowDownIcon color="secondary" />}
+        afterSlot={<ArrowDownIcon color={IconColor.secondary} />}
       />
       {isDropdownOpen && (
         <div className={styles.dropdown__options}>
@@ -104,11 +105,13 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
             <div
               key={option.key}
               className={`${styles.dropdown__option} ${
-                value.some((v) => v.key === option.key) ? styles.selected : ""
+                value.some((v) => v.key === option.key)
+                  ? styles.dropdown__option_selected
+                  : ""
               }`}
               onClick={() => handleOptionClick(option)}
             >
-              <Text view="p-16">{option.value}</Text>
+              <Text view={TextView.p16}>{option.value}</Text>
             </div>
           ))}
         </div>
@@ -117,4 +120,4 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   );
 };
 
-export default MultiDropdown;
+export default React.memo(MultiDropdown);

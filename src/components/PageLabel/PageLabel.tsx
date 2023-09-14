@@ -1,30 +1,23 @@
+import cn from "classnames";
 import * as React from "react";
-import Text from "components/Text";
+import Text, { TextColor, TextView } from "components/Text";
 import styles from "./PageLabel.module.scss";
 
 export type PageLabelProps = {
   title: string;
   description: string;
-  align?: "start" | "end" | "left" | "right" | "center";
-  margin?: string;
+  className?: string;
 };
 
 const PageLabel: React.FC<PageLabelProps> = ({
   title,
   description,
-  align = "center",
-  margin = "100px auto 0",
+  className,
 }) => {
   return (
-    <div
-      className={styles.page_label}
-      style={{
-        textAlign: align,
-        margin: margin,
-      }}
-    >
-      <Text view="title">{title}</Text>
-      <Text view="p-20" color="secondary">
+    <div className={cn(styles["page-label"], className)}>
+      <Text view={TextView.title}>{title}</Text>
+      <Text view={TextView.p20} color={TextColor.secondary}>
         {description}
       </Text>
     </div>

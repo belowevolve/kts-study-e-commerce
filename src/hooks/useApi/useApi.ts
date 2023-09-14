@@ -7,8 +7,7 @@ export type ApiResponse<T> = {
   error: Error | null;
 };
 
-const API_URL = "https://kts-store-api.glitch.me/api";
-const useApi = <T>(initialUrl: string): ApiResponse<T> => {
+const useApi = <T>(apiUrl: string, query: string): ApiResponse<T> => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -16,7 +15,7 @@ const useApi = <T>(initialUrl: string): ApiResponse<T> => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(API_URL + initialUrl);
+        const response = await axios.get(apiUrl + query);
         if (response && response.data) setData(response.data);
         setLoading(false);
       } catch (error) {
@@ -26,9 +25,13 @@ const useApi = <T>(initialUrl: string): ApiResponse<T> => {
     };
 
     fetchData();
-  }, [initialUrl]);
+  }, [apiUrl, query]);
 
   return { data, loading, error };
+};
+
+export const useFakeStoreApi = <T>(query: string): ApiResponse<T> => {
+  return useApi<T>("https://kts-store-api.glitch.me/api", query);
 };
 
 export default useApi;

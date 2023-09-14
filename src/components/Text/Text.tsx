@@ -1,20 +1,21 @@
 import cn from "classnames";
 import * as React from "react";
+import { TextColor, TextTag, TextView, TextWeight } from "./config";
 import text from "./Text.module.scss";
 
 export type TextProps = {
   /** Дополнительный класс */
   className?: string;
   /** Стиль отображения */
-  view?: "title" | "button" | "p-20" | "p-18" | "p-16" | "p-14";
+  view?: TextView;
   /** Html-тег */
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
+  tag?: TextTag;
   /** Начертание шрифта */
-  weight?: "normal" | "medium" | "semiBold" | "bold";
+  weight?: TextWeight;
   /** Контент */
   children: React.ReactNode;
   /** Цвет */
-  color?: "primary" | "secondary" | "accent";
+  color?: TextColor;
 
   fontSize?: string;
   /** Максимальное кол-во строк */
@@ -24,18 +25,18 @@ export type TextProps = {
 const Text: React.FC<TextProps> = ({
   className,
   view,
-  tag: TextTag = "p",
+  tag: TextTagProp = TextTag.p,
   weight,
   children,
   color,
   maxLines,
 }) => {
   return (
-    <TextTag
+    <TextTagProp
       className={cn(
         text.text,
-        view && text[view],
-        color && text[color],
+        view && text[`text_view-${view}`],
+        color && text[`text_color-${color}`],
         className
       )}
       style={{
@@ -45,7 +46,7 @@ const Text: React.FC<TextProps> = ({
       }}
     >
       {children}
-    </TextTag>
+    </TextTagProp>
   );
 };
 

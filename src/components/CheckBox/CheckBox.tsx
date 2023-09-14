@@ -1,6 +1,7 @@
+import cn from "classnames";
 import * as React from "react";
 import CheckIcon from "../icons/CheckIcon";
-import "./CheckBox.css";
+import styles from "./CheckBox.module.scss";
 
 export type CheckBoxProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -10,30 +11,37 @@ export type CheckBoxProps = Omit<
   onChange: (checked: boolean) => void;
 };
 
-const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
-  const [isChecked, setIsChecked] = React.useState(props.checked);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newChecked = event.target.checked;
-    setIsChecked(newChecked);
-
-    if (onChange) {
-      onChange(newChecked);
-    }
-  };
+const CheckBox: React.FC<CheckBoxProps> = ({
+  checked,
+  onChange,
+  className,
+  disabled,
+  ...props
+}) => {
+  const onChangeHandler = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.checked);
+    },
+    [onChange]
+  );
 
   return (
-    <label className={`checkbox-label ${props.className}`}>
+    <label
+      className={cn(
+        styles["checkbox-wrapper"],
+        disabled && styles["checkbox-wrapper_disabled"],
+        className
+      )}
+    >
       <input
         type="checkbox"
-        onChange={handleChange}
-        checked={isChecked}
+        className={styles.checkbox}
+        onChange={onChangeHandler}
+        checked={checked}
+        disabled={disabled}
         {...props}
-        className=""
       />
-      <span className="checkbox-custom">
-        {isChecked && <CheckIcon width={40} height={40} />}
-      </span>
+      <CheckIcon width={40} height={40} className={styles.checkbox__mark} />
     </label>
   );
 };

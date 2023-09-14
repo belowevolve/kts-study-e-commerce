@@ -1,8 +1,10 @@
+import cn from "classnames";
 import * as React from "react";
-
+import { IconColor } from "./config";
+import styles from "./Icon.module.scss";
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;
-  color?: "primary" | "secondary" | "accent";
+  color?: IconColor;
   width?: number;
   height?: number;
 };
@@ -17,9 +19,8 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      color={color ? `var(--text-${color})` : "currentColor"}
       fill="none"
-      className={className}
+      className={cn(color && styles[`icon_color-${color}`], className)}
       width={width}
       height={height}
       viewBox={`0 0 24 24`}
