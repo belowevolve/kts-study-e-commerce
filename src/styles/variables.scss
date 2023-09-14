@@ -36,6 +36,7 @@ $button-primary-text-active: #ffffff;
 $button-border: 1px solid #afadb5;
 $button-add-to-cart-color: white;
 $button-add-to-cart-text: black;
+$button-loader: white;
 $text-primary: #000000;
 $text-secondary: #afadb5;
 $text-accent: $brand;
@@ -49,6 +50,7 @@ $input-text-focus: #000000;
 $input-bg-disabled: #ffffff;
 $input-border-disabled: #ffffff;
 $input-text-disabled: rgba(0, 0, 0, 0.2);
+
 $checkbox-bg: #ffffff;
 $checkbox-border: #ffffff;
 $checkbox-bg-hover: #ffffff;
@@ -58,9 +60,9 @@ $checkbox-border-disabled: #ffffff;
 $checkbox-check: $brand;
 $checkbox-check-hover: $brand;
 $checkbox-check-disabled: rgba(0, 0, 0, 0.2);
+
 $card-image-bg: #d9d9d9;
 $card-bg: #ffffff;
-$dropdown-options-bg: #ffffff;
 
 $slider-button: black;
 $slider-button-disabled: rgba(175, 173, 181, 0.2);
@@ -88,3 +90,11 @@ $border-radius: 0px;
 
 $shadow-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 $shadow-nav: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+
+$dropdown-options-bg: #ffffff;
+$dropdown-options-rows: 3;
+$dropdown-options-padding: $space-s;
+
+$icon-primary: #000000;
+$icon-secondary: #afadb5;
+$icon-accent: $brand;

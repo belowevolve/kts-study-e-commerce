@@ -1,5 +1,6 @@
 import cn from "classnames";
 import * as React from "react";
+import { ReactComponent as Cross } from "styles/svg/cross.svg";
 import styles from "./Input.module.scss";
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -17,23 +18,30 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   { value, onChange, afterSlot, ...props },
   ref
 ) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+  const handleChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(event.target.value);
+    },
+    [onChange]
+  );
+  const handleClear = () => {
+    onChange("");
   };
 
   return (
-    <label className={cn(styles.input_container, props.className)}>
+    <label className={cn(styles["input-container"], props.className)}>
       <input
         type="text"
         {...props}
         ref={ref}
         value={value}
         onChange={handleChange}
-        className={styles.input_field}
+        className={styles["input-field"]}
       />
+      {value && <Cross className={styles["x-slot"]} onClick={handleClear} />}
       {!!afterSlot && afterSlot}
     </label>
   );
 });
 
-export default Input;
+export default React.memo(Input);

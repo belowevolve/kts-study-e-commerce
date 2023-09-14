@@ -1,5 +1,5 @@
 import * as React from "react";
-import Text from "../Text";
+import Text, { TextView, TextColor, TextWeight } from "../Text";
 
 import styles from "./Card.module.scss";
 export type CardProps = {
@@ -34,16 +34,16 @@ const Card: React.FC<CardProps> = ({
   return (
     <div className={`${styles.card} ${className}`} onClick={onClick}>
       <div className={styles.card__header}>
-        <img className={styles.card__cardImg} src={image} alt="card" />
+        <img className={styles["card__card-img"]} src={image} alt="card" />
       </div>
 
       <div className={styles.card__body}>
         {captionSlot && (
           <Text
             className={styles.card__caption}
-            view="p-14"
-            color="secondary"
-            weight="medium"
+            view={TextView.p14}
+            color={TextColor.secondary}
+            weight={TextWeight.medium}
           >
             {captionSlot}
           </Text>
@@ -51,9 +51,9 @@ const Card: React.FC<CardProps> = ({
 
         <Text
           className={styles.card__title}
-          view="p-20"
-          weight="medium"
-          color="primary"
+          view={TextView.p20}
+          color={TextColor.primary}
+          weight={TextWeight.medium}
           maxLines={2}
         >
           {title}
@@ -61,8 +61,8 @@ const Card: React.FC<CardProps> = ({
 
         <Text
           className={styles.card__subtitle}
-          view="p-16"
-          color="secondary"
+          view={TextView.p16}
+          color={TextColor.secondary}
           maxLines={3}
         >
           {subtitle}
@@ -70,7 +70,11 @@ const Card: React.FC<CardProps> = ({
 
         <div className={styles.card__footer}>
           {contentSlot && (
-            <Text view="p-18" color="primary" weight="bold">
+            <Text
+              view={TextView.p18}
+              color={TextColor.primary}
+              weight={TextWeight.medium}
+            >
               {contentSlot}
             </Text>
           )}
@@ -82,4 +86,4 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
-export default Card;
+export default React.memo(Card);

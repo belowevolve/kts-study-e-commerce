@@ -1,0 +1,13 @@
+@use "@variables" as *;
+
+.icon_color-primary {
+  color: $icon-primary;
+}
+
+.icon_color-secondary {
+  color: $icon-secondary;
+}
+
+.icon_color-accent {
+  color: $icon-accent;
+}

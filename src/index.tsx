@@ -1,4 +1,5 @@
 import * as React from "react";
+import "config/configureMobX";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 

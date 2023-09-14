@@ -27,7 +27,8 @@
       "@variables": ["styles/variables.scss"],
       "@mixins": ["styles/mixins.scss"],
       "styles": ["styles"],
-      "hooks": ["hooks"]
+      "hooks": ["hooks"],
+      "pages": ["pages"]
     }
   },
   "include": ["src"],

@@ -1,0 +1,33 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.related {
+  margin-top: $space-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-s;
+  @include breakpoint(md) {
+    gap: $space-l;
+  }
+  &__text {
+    font-size: 32px;
+  }
+
+  &__recs {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    overflow: scroll;
+
+    gap: $space-s;
+    @include breakpoint(md) {
+      gap: $space-l;
+    }
+    &__product {
+      min-width: 250px;
+      @include breakpoint(md) {
+        min-width: 360px;
+      }
+    }
+  }
+}
