@@ -1,7 +1,7 @@
 import cn from "classnames";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import Text from "components/Text";
+import Text, { TextView } from "components/Text";
 import styles from "./NavbarItem.module.scss";
 
 export type NavbarItemProps = {
@@ -17,7 +17,7 @@ const NavbarItem: React.FC<NavbarItemProps> = ({ to, label, pathName }) => {
       className={cn(styles.nav__item, isActive ? styles.active : "")}
       to={to}
     >
-      <Text view="p-18">{label}</Text>
+      <Text view={TextView.p18}>{label}</Text>
       <div className={cn(styles.link, isActive ? styles.active : "")}></div>
     </Link>
   );
