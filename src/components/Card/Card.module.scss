@@ -51,8 +51,8 @@
   }
 
   &__footer {
-    align-items: center;
     display: flex;
+    align-items: center;
     margin-top: $space-m;
   }
 
@@ -72,5 +72,22 @@
       margin-top: $space-xxs;
       padding-left: 0;
     }
+  }
+
+  &__skeleton {
+    &__content {
+      height: $line-height-p18;
+    }
+
+    &__action {
+      height: $button-min-height;
+    }
+  }
+}
+
+.flex-1 {
+  flex: 1;
+  @media (max-width: 550px) {
+    min-width: 100%;
   }
 }

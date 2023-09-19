@@ -3,7 +3,7 @@
 
 .button {
   padding: $space-s;
-  min-height: 52px;
+  min-height: $button-min-height;
   border: 0;
   background: $brand;
   white-space: nowrap;

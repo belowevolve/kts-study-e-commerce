@@ -1,45 +1,94 @@
+import { observer, useLocalObservable } from "mobx-react-lite";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "components/Button";
 import Card from "components/Card";
+import CardSkeleton from "components/Card/CardSkeleton";
 import Input from "components/Input";
-import Loader from "components/Loader";
 import MultiDropdown, { Option } from "components/MultiDropdown";
 import PageLabel from "components/PageLabel";
+import Pagination from "components/Pagination";
 import Text, { TextColor, TextView, TextWeight } from "components/Text";
-import useFetchCategories from "hooks/useFetchCategories";
-
-import useFetchProducts from "./hooks/useFetchProducts";
+import { Meta } from "config/globalEnums";
+import { QUERY_PARAM_PAGE } from "config/searchParams";
+import CategoryStore from "store/CategoryStore";
+import ProductStore from "store/ProductStore";
+import rootStore from "store/RootStore";
+import { useQueryParamsStoreInit } from "store/RootStore/hooks/useQueryParamsStoreInit";
+import { ReactComponent as Cross } from "styles/svg/cross.svg";
 import styles from "./Products.module.scss";
 
 const Products: React.FC = () => {
-  const [include, setInclude] = React.useState<Option[]>([]);
-  const [substring, setSubstring] = React.useState("");
-  const [offset, setOffset] = React.useState(0);
-  const [limit, setLimit] = React.useState(undefined);
-  const {
-    data: categories,
-    loading: categoriesLoading,
-    error: categoriesError,
-  } = useFetchCategories();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  useQueryParamsStoreInit();
 
-  const {
-    data: products,
-    loading,
-    error,
-  } = useFetchProducts(
-    include.reduce((query, category) => query + String(category.key) + "|", ""),
-    substring,
-    offset,
-    limit
+  const productStore = useLocalObservable(() => new ProductStore());
+  const categoryStore = useLocalObservable(() => new CategoryStore());
+
+  const [include, setInclude] = React.useState<Option[]>([]);
+  const [substring, setSubstring] = React.useState(
+    () => (rootStore.query.getParam("substring") as string) || ""
   );
 
-  console.log(setOffset, setLimit, categoriesError, loading, error);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+  const includeIds: string = React.useMemo(
+    () =>
+      include.reduce(
+        (query, category) => query + String(category.key) + "|",
+        ""
+      ),
+    [include]
+  );
 
-  const navigate = useNavigate();
+  React.useEffect(() => {
+    productStore.getProductsList({
+      substring: substring,
+      include: (rootStore.query.getParam("include") as string) || "",
+      page: searchParams.get(QUERY_PARAM_PAGE) || "1",
+    });
+
+    productStore.getLength({
+      substring,
+      include: (rootStore.query.getParam("include") as string) || "",
+    });
+
+    const fetchCategories = async () => {
+      await categoryStore.getCategoriesList();
+      setInclude(() =>
+        ((rootStore.query.getParam("include") as string) || "")
+          .split("|")
+          .filter((id) => id.trim() !== "")
+          .map((el) => ({
+            key: el,
+            value: categoryStore.collectionList.entities[el].name,
+          }))
+      );
+    };
+    fetchCategories();
+  }, []);
+
+  const handleSubmit = React.useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      setSearchParams(`?substring=${substring}&include=${includeIds}&page=1`);
+      productStore.getLength({
+        substring,
+        include: includeIds,
+      });
+    },
+
+    [setSearchParams, substring, includeIds, productStore]
+  );
+
+  const OPTIONS = React.useMemo(
+    () =>
+      categoryStore.list!.map((category) => ({
+        key: category.id,
+        value: category.name,
+      })),
+    [categoryStore.list]
+  );
   return (
     <>
       <PageLabel
@@ -49,36 +98,35 @@ to see our old products please enter the name of the item"
       ></PageLabel>
 
       <div className={styles.products_page}>
-        <div className={styles.search_container}>
-          <form onSubmit={handleSubmit} className={styles.find}>
+        <form onSubmit={handleSubmit} className={styles.search_container}>
+          <div className={styles.find}>
             <Input
               value={substring}
               onChange={(e) => setSubstring(e)}
               placeholder="Search Products"
+              afterSlot={
+                substring && (
+                  <Cross
+                    className={styles.cross}
+                    onClick={() => setSubstring("")}
+                  />
+                )
+              }
             />
             <Button type="submit">Find Now</Button>
-          </form>
-          {categoriesLoading ? (
-            <Loader />
-          ) : (
-            <MultiDropdown
-              className={styles.multiDropdown}
-              options={categories!.map((category) => ({
-                key: category.id,
-                value: category.name,
-              }))}
-              value={include}
-              onChange={(e) => {
-                setInclude(e);
-              }}
-              getTitle={(elements: Option[]) =>
-                elements.length === 0
-                  ? "Choose category"
-                  : elements.map((el: Option) => el.value).join(" | ")
-              }
-            ></MultiDropdown>
-          )}
-        </div>
+          </div>
+          <MultiDropdown
+            className={styles["multi-dropdown"]}
+            options={OPTIONS}
+            onChange={setInclude}
+            value={include}
+            getTitle={(elements: Option[]) =>
+              elements.length === 0
+                ? "Choose category"
+                : elements.map((el: Option) => el.value).join(" | ")
+            }
+          />
+        </form>
         <div className={styles.total}>
           <Text view={TextView.title} className={styles.total__text}>
             Total products
@@ -88,11 +136,14 @@ to see our old products please enter the name of the item"
             color={TextColor.accent}
             weight={TextWeight.bold}
           >
-            {products?.length}
+            {productStore.length}
           </Text>
         </div>
         <div className={styles.products}>
-          {products?.map((product) => (
+          {productStore.meta === Meta.loading && (
+            <CardSkeleton className={styles.product} amount={12} />
+          )}
+          {productStore?.list.map((product) => (
             <Card
               key={product.id}
               onClick={() => navigate(`/products/${product.id}`)}
@@ -107,8 +158,14 @@ to see our old products please enter the name of the item"
           ))}
         </div>
       </div>
+      <Pagination
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+        itemsLength={productStore.length}
+        pagesToShow={3}
+      />
     </>
   );
 };
 
-export default Products;
+export default observer(Products);

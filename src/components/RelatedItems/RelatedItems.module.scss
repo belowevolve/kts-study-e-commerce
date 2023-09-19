@@ -17,8 +17,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    overflow: scroll;
-
+    overflow-x: scroll;
+    padding: $space-xs;
+    margin: -$space-xs;
     gap: $space-s;
     @include breakpoint(md) {
       gap: $space-l;
