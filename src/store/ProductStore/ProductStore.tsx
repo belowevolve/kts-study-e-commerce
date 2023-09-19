@@ -173,6 +173,8 @@ export default class ProductStore implements IProductStore, ILocalStore {
 
   destroy(): void {}
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => rootStore.query.params,
     (params) => {
