@@ -1,3 +1,4 @@
+import cn from "classnames";
 import * as React from "react";
 import { IconColor } from "components/icons/Icon";
 import Input from "../Input";
@@ -35,83 +36,115 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   disabled,
   getTitle,
 }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState<boolean>(false);
+  const rootRef = React.useRef<HTMLDivElement | null>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [isTyping, setIsTyping] = React.useState(false);
+  const [filter, setFilter] = React.useState("");
 
-  const dropdownRef = React.useRef<null | HTMLDivElement>(null);
+  const isAlreadySelected = (selectedOption: Option) => {
+    // Why selectedOption key is number????
+    selectedOption.key = selectedOption.key.toString();
+    return value.some((option) => option.key === selectedOption.key);
+  };
+  const filteredOptions = React.useMemo(
+    () =>
+      options.filter((o) =>
+        o.value.toLowerCase().includes(filter.toLowerCase())
+      ),
+    [options, filter]
+  );
 
-  const [searchTerm, setSearchTerm] = React.useState<string>("");
+  const onClickDropdown = React.useCallback(() => {
+    if (disabled) {
+      return;
+    }
+
+    setIsOpen(true);
+    setIsTyping(true);
+  }, [disabled]);
+
+  const onClickOption = (selectedOption: Option) => () => {
+    if (disabled) {
+      return;
+    }
+
+    setIsTyping(false);
+    if (isAlreadySelected(selectedOption)) {
+      onChange(value.filter((o) => o.key !== selectedOption.key));
+      return;
+    }
+
+    onChange([...value, selectedOption]);
+  };
 
   React.useEffect(() => {
-    if (dropdownRef.current === null) return;
-
-    function handleClickOutside(event: MouseEvent) {
-      if (!dropdownRef.current!.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
+    const onDocumentClick = (e: MouseEvent) => {
+      if (!rootRef.current?.contains(e.target as Element)) {
+        setIsOpen(false);
+        setIsTyping(false);
+        setFilter("");
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
+    };
+    document.addEventListener("click", onDocumentClick);
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", onDocumentClick);
     };
   }, []);
 
   React.useEffect(() => {
-    setIsDropdownOpen(false);
+    if (disabled) {
+      setIsOpen(false);
+      setIsTyping(false);
+      setFilter("");
+    }
   }, [disabled]);
 
-  const openDropdown = () => {
-    !disabled && setIsDropdownOpen(true);
-  };
+  const title = React.useMemo(() => getTitle(value), [getTitle, value]);
 
-  const handleOptionClick = (option: Option) => {
-    const newValue = [...value];
-
-    if (newValue.some((v) => v.key === option.key)) {
-      newValue.splice(
-        newValue.findIndex((v) => v.key === option.key),
-        1
-      );
-    } else {
-      newValue.push(option);
+  const inputValue = React.useMemo(() => {
+    if (!isOpen) {
+      if (value.length === 0) {
+        return "";
+      }
+      return title;
     }
-
-    onChange(newValue);
-    setSearchTerm("");
-  };
-
-  const filteredOptions = options.filter((option) =>
-    option.value.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    if (isTyping) {
+      return filter;
+    }
+    return "";
+  }, [isOpen, isTyping, value.length, title, filter]);
 
   return (
     <div
-      className={`${styles.dropdown} ${className || ""}`}
-      ref={dropdownRef}
-      onFocus={openDropdown}
-      onClick={openDropdown}
+      className={cn(
+        styles.dropdown,
+        isOpen && styles.dropdown_open,
+        disabled && styles.dropdown_disabled,
+        className
+      )}
+      ref={rootRef}
     >
       <Input
-        value={
-          isDropdownOpen ? searchTerm : value.length ? getTitle(value) : ""
-        }
-        onChange={(value) => setSearchTerm(value)}
-        disabled={disabled}
-        placeholder={getTitle(value)}
+        className={styles.dropdown__input}
+        value={inputValue}
+        placeholder={title}
+        onChange={setFilter}
+        onClick={onClickDropdown}
         afterSlot={<ArrowDownIcon color={IconColor.secondary} />}
       />
-      {isDropdownOpen && (
+      {isOpen && (
         <div className={styles.dropdown__options}>
-          {filteredOptions.map((option) => (
+          {filteredOptions.map((o) => (
             <div
-              key={option.key}
-              className={`${styles.dropdown__option} ${
-                value.some((v) => v.key === option.key)
-                  ? styles.dropdown__option_selected
-                  : ""
-              }`}
-              onClick={() => handleOptionClick(option)}
+              key={o.key}
+              className={cn(
+                styles.dropdown__option,
+                isAlreadySelected(o) && styles.dropdown__option_selected
+              )}
+              onClick={onClickOption(o)}
             >
-              <Text view={TextView.p16}>{option.value}</Text>
+              <Text view={TextView.p16}>{o.value}</Text>
             </div>
           ))}
         </div>

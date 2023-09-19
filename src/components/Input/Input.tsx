@@ -1,7 +1,7 @@
 import cn from "classnames";
 import * as React from "react";
-import { ReactComponent as Cross } from "styles/svg/cross.svg";
 import styles from "./Input.module.scss";
+
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "onChange" | "value"
@@ -24,10 +24,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
     },
     [onChange]
   );
-  const handleClear = () => {
-    onChange("");
-  };
-
   return (
     <label className={cn(styles["input-container"], props.className)}>
       <input
@@ -38,7 +34,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
         onChange={handleChange}
         className={styles["input-field"]}
       />
-      {value && <Cross className={styles["x-slot"]} onClick={handleClear} />}
       {!!afterSlot && afterSlot}
     </label>
   );

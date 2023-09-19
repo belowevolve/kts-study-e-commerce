@@ -20,7 +20,7 @@
       color: $text-secondary;
     }
   }
-  .multiDropdown {
+  .multi-dropdown {
     width: 100%;
     transition: 0.3s ease width;
     @include breakpoint(md) {

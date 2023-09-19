@@ -87,7 +87,7 @@ $loader-s: 16px;
 $loader-s-margin: 4px;
 
 $border-radius: 0px;
-
+$button-min-height: 52px;
 $shadow-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 $shadow-nav: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 
@@ -98,3 +98,13 @@ $dropdown-options-padding: $space-s;
 $icon-primary: #000000;
 $icon-secondary: #afadb5;
 $icon-accent: $brand;
+
+$pagination-button: rgba(21, 20, 17, 1);
+$pagination-button-hover: $brand;
+$pagination-button-disabled: rgba(175, 173, 181, 1);
+$pagination-page-padding: 10px;
+$pagination-page-text: $text-primary;
+$pagination-page-text-weight: 500;
+$pagination-page-text-active: white;
+$pagination-page-text-hover: $brand;
+$pagination-page-button-active: $brand;

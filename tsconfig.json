@@ -28,7 +28,8 @@
       "@mixins": ["styles/mixins.scss"],
       "styles": ["styles"],
       "hooks": ["hooks"],
-      "pages": ["pages"]
+      "pages": ["pages"],
+      "store": ["store"]
     }
   },
   "include": ["src"],
