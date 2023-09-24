@@ -6,11 +6,11 @@ import { AiOutlineCloseSquare } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 
 import { navLinks } from "config/navLinks";
-import { ReactComponent as Cart } from "styles/svg/cart.svg";
-import { ReactComponent as Logo } from "styles/svg/logo.svg";
-import { ReactComponent as LogoName } from "styles/svg/logoName.svg";
-import { ReactComponent as MenuRight } from "styles/svg/menuRight.svg";
-import { ReactComponent as User } from "styles/svg/user.svg";
+import Cart from "styles/svg/cart.svg";
+import Logo from "styles/svg/logo.svg";
+import LogoName from "styles/svg/logoName.svg";
+import MenuRight from "styles/svg/menuRight.svg";
+import User from "styles/svg/user.svg";
 import NavbarItem from "../NavbarItem";
 import navItemStyles from "../NavbarItem/NavbarItem.module.scss";
 import styles from "./Navbar.module.scss";

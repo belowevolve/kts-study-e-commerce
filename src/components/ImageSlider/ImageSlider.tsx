@@ -1,7 +1,7 @@
 import cn from "classnames";
 import * as React from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
-import { ReactComponent as LeftArrow } from "styles/svg/arrowLeft.svg";
+import LeftArrow from "styles/svg/arrowLeft.svg";
 import styles from "./ImageSlider.module.scss";
 import "react-image-gallery/styles/css/image-gallery.css";
 

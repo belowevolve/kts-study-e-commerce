@@ -5,7 +5,7 @@ import Button from "components/Button";
 import Text, { TextView, TextWeight } from "components/Text";
 import { QUERY_PARAM_PAGE } from "config/searchParams";
 import { PRODUCTS_PER_PAGE } from "store/ProductStore";
-import { ReactComponent as ArrowLeft } from "styles/svg/arrowLeft.svg";
+import ArrowLeft from "styles/svg/arrowLeft.svg";
 import styles from "./Pagination.module.scss";
 
 export type PaginationProps = {

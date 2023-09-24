@@ -32,8 +32,7 @@ type PrivateFields =
   | "_meta"
   | "_product"
   | "_metaProduct"
-  | "_length"
-  | "_qpReaction";
+  | "_length";
 
 export default class ProductStore implements IProductStore, ILocalStore {
   private readonly _apiStore = new ApiStore(PRODUCTS_URL);
@@ -51,7 +50,6 @@ export default class ProductStore implements IProductStore, ILocalStore {
       _product: observable.ref,
       _metaProduct: observable,
       _length: observable.ref,
-      _qpReaction: observable.ref,
       list: computed,
       meta: computed,
       product: computed,
@@ -171,10 +169,10 @@ export default class ProductStore implements IProductStore, ILocalStore {
     });
   }
 
-  destroy(): void {}
+  destroy(): void {
+    this._qpReaction();
+  }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => rootStore.query.params,
     (params) => {
