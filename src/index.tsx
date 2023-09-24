@@ -1,6 +1,7 @@
 import * as React from "react";
-import "config/configureMobX";
 import { createRoot } from "react-dom/client";
+import "config/configureMobX";
+import "regenerator-runtime";
 import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
@@ -8,3 +9,7 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </React.StrictMode>
 );
+
+if (module.hot) {
+  module.hot.accept();
+}

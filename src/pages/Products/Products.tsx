@@ -15,7 +15,7 @@ import CategoryStore from "store/CategoryStore";
 import ProductStore from "store/ProductStore";
 import rootStore from "store/RootStore";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks/useQueryParamsStoreInit";
-import { ReactComponent as Cross } from "styles/svg/cross.svg";
+import Cross from "styles/svg/cross.svg";
 import styles from "./Products.module.scss";
 
 const Products: React.FC = () => {

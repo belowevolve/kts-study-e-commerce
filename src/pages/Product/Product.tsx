@@ -7,7 +7,7 @@ import RelatedItems from "components/RelatedItems";
 import Text, { TextView } from "components/Text";
 import { Meta } from "config/globalEnums";
 import ProductStore from "store/ProductStore";
-import { ReactComponent as ArrowLeft } from "styles/svg/arrowLeft.svg";
+import ArrowLeft from "styles/svg/arrowLeft.svg";
 
 import styles from "./Product.module.scss";
 
