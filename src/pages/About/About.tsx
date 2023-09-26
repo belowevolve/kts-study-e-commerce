@@ -4,7 +4,10 @@ import PageLabel from "components/PageLabel";
 const About: React.FC = () => {
   return (
     <div>
-      <PageLabel title="About Us" description="Some sample info"></PageLabel>
+      <PageLabel
+        title="About Us"
+        description="Some sample info about us"
+      ></PageLabel>
     </div>
   );
 };

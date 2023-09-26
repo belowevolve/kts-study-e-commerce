@@ -9,6 +9,7 @@ import MultiDropdown, { Option } from "components/MultiDropdown";
 import PageLabel from "components/PageLabel";
 import Pagination from "components/Pagination";
 import Text, { TextColor, TextView, TextWeight } from "components/Text";
+import WithSkeleton from "components/WithSkeleton";
 import { Meta } from "config/globalEnums";
 import { QUERY_PARAM_INCLUDE, QUERY_PARAM_PAGE } from "config/searchParams";
 import CategoryStore from "store/CategoryStore";
@@ -65,66 +66,63 @@ const Products: React.FC = () => {
   );
 
   return (
-    <>
+    <div className={styles["products-page"]}>
       <PageLabel
         title="Products"
         description="We display products based on the latest products we have, if you want
 to see our old products please enter the name of the item"
       ></PageLabel>
 
-      <div className={styles.products_page}>
-        <form onSubmit={handleSubmit} className={styles.search_container}>
-          <div className={styles.find}>
-            <Input
-              value={substring}
-              onChange={(e) => setSubstring(e)}
-              placeholder="Search Products"
-              afterSlot={
-                substring && (
-                  <Cross
-                    className={styles.cross}
-                    onClick={() => setSubstring("")}
-                  />
-                )
-              }
-            />
-            <Button type="submit">Find Now</Button>
-          </div>
-          <MultiDropdown
-            className={styles["multi-dropdown"]}
-            options={categoryStore.options}
-            onChange={categoryStore.setIncluded}
-            value={toJS(categoryStore.included)}
-            getTitle={(elements: Option[]) =>
-              elements.length === 0
-                ? "Choose category"
-                : elements.map((el: Option) => el.value).join(" | ")
+      <form onSubmit={handleSubmit} className={styles["search-container"]}>
+        <div className={styles.find}>
+          <Input
+            value={substring}
+            onChange={(e) => setSubstring(e)}
+            placeholder="Search Products"
+            afterSlot={
+              substring && (
+                <Cross
+                  className={styles.cross}
+                  onClick={() => setSubstring("")}
+                />
+              )
             }
           />
-        </form>
-        <div className={styles.total}>
-          <Text view={TextView.title} className={styles.total__text}>
-            Total products
-          </Text>
-          <Text
-            view={TextView.p20}
-            color={TextColor.accent}
-            weight={TextWeight.bold}
-          >
-            {productStore.length}
-          </Text>
+          <Button type="submit">Find Now</Button>
         </div>
-        <div className={styles.products}>
-          {productStore.meta === Meta.loading &&
-            Array(12)
-              .fill(0)
-              .map((_, index) => (
-                <Card
-                  className={styles.product}
-                  loading
-                  key={`card-skeleton-${index}`}
-                />
-              ))}
+        <MultiDropdown
+          className={styles["multi-dropdown"]}
+          options={categoryStore.options}
+          onChange={categoryStore.setIncluded}
+          value={toJS(categoryStore.included)}
+          getTitle={(elements: Option[]) =>
+            elements.length === 0
+              ? "Choose category"
+              : elements.map((el: Option) => el.value).join(" | ")
+          }
+        />
+      </form>
+      <div className={styles.total}>
+        <Text view={TextView.title} className={styles.total__text}>
+          Total products
+        </Text>
+        <Text
+          view={TextView.p20}
+          color={TextColor.accent}
+          weight={TextWeight.bold}
+        >
+          {productStore.length}
+        </Text>
+      </div>
+      <div className={styles.products}>
+        <WithSkeleton
+          showSkeleton={productStore.meta === Meta.loading}
+          skeleton={Array(12)
+            .fill(0)
+            .map((_, index) => (
+              <Card loading key={`card-skeleton-${index}`} />
+            ))}
+        >
           {productStore?.list.map((product) => (
             <Card
               key={product.id}
@@ -135,10 +133,9 @@ to see our old products please enter the name of the item"
               contentSlot={`${product.price} $`}
               image={product.images[0]}
               actionSlot={<Button>Add to cart</Button>}
-              className={styles.product}
             />
           ))}
-        </div>
+        </WithSkeleton>
       </div>
       <Pagination
         searchParams={searchParams}
@@ -146,7 +143,7 @@ to see our old products please enter the name of the item"
         itemsLength={toJS(productStore.length)}
         pagesToShow={3}
       />
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,28 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.categories-page {
+  @include page;
+}
+
+.categories {
+  margin-top: $space-l;
+  display: grid;
+  justify-content: space-between;
+  transition: grid-template-columns 0.3s ease;
+  grid-template-columns: repeat(3, minmax(0, 360px));
+  grid-row-gap: 30px;
+  grid-column-gap: $space-xs;
+}
+
+@media (min-width: 1500px) {
+  .categories {
+    grid-template-columns: repeat(4, minmax(0, 360px));
+  }
+}
+
+@media (max-width: 900px) {
+  .categories {
+    grid-template-columns: repeat(2, minmax(0, 360px));
+  }
+}
