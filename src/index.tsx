@@ -4,11 +4,7 @@ import "config/configureMobX";
 import "regenerator-runtime";
 import App from "./App";
 
-createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+createRoot(document.getElementById("root")!).render(<App />);
 
 if (module.hot) {
   module.hot.accept();

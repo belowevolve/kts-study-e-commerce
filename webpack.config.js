@@ -43,10 +43,12 @@ module.exports = {
   output: {
     path: buildPath,
     filename: "bundle.js",
+    publicPath: "/",
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(srcPath, "index.html"),
+      favicon: "./src/styles/svg/logo.svg",
     }),
     new TsCheckerPlugin(),
     !isProd && new ReactRefreshWebpackPlugin(),

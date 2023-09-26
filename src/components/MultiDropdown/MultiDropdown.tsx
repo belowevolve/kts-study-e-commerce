@@ -42,10 +42,10 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const [filter, setFilter] = React.useState("");
 
   const isAlreadySelected = (selectedOption: Option) => {
-    // Why selectedOption key is number????
     selectedOption.key = selectedOption.key.toString();
     return value.some((option) => option.key === selectedOption.key);
   };
+
   const filteredOptions = React.useMemo(
     () =>
       options.filter((o) =>
@@ -69,6 +69,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     }
 
     setIsTyping(false);
+    setFilter("");
     if (isAlreadySelected(selectedOption)) {
       onChange(value.filter((o) => o.key !== selectedOption.key));
       return;

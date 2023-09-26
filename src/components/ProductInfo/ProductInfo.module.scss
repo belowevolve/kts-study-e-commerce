@@ -30,10 +30,12 @@
     margin: 0px;
   }
 
+  &__price {
+    margin-top: $space-xl;
+  }
+
   &__buy {
     display: flex;
-    padding-top: $space-l;
-    flex-direction: column;
     align-items: flex-start;
     gap: $space-xl;
 
@@ -71,24 +73,21 @@
       height: 100%;
     }
   }
+
   &__info {
     flex: 1;
   }
   &__label {
     height: $line-height-title;
   }
-
   &__description {
-    margin-top: $space-xl;
+    padding-top: $space-m;
   }
-
-  &__buy {
-    margin-top: $space-xl;
-    gap: $space-xl;
-    display: flex;
+  &__price {
+    padding-top: $space-l;
   }
-
   &__flex-1 {
+    padding-top: $space-xl;
     flex: 1;
   }
 }

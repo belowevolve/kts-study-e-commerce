@@ -4,3 +4,10 @@ export enum Meta {
   error = "error",
   success = "success",
 }
+
+export enum HTTPMethod {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}

@@ -1,20 +1,20 @@
+import { toJS } from "mobx";
 import { observer, useLocalObservable } from "mobx-react-lite";
 import * as React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "components/Button";
 import Card from "components/Card";
-import CardSkeleton from "components/Card/CardSkeleton";
 import Input from "components/Input";
 import MultiDropdown, { Option } from "components/MultiDropdown";
 import PageLabel from "components/PageLabel";
 import Pagination from "components/Pagination";
 import Text, { TextColor, TextView, TextWeight } from "components/Text";
 import { Meta } from "config/globalEnums";
-import { QUERY_PARAM_PAGE } from "config/searchParams";
+import { QUERY_PARAM_INCLUDE, QUERY_PARAM_PAGE } from "config/searchParams";
 import CategoryStore from "store/CategoryStore";
-import ProductStore from "store/ProductStore";
-import rootStore from "store/RootStore";
+import ProductStore from "store/ProductsStore";
 import { useQueryParamsStoreInit } from "store/RootStore/hooks/useQueryParamsStoreInit";
+import rootStore from "store/RootStore/instance";
 import Cross from "styles/svg/cross.svg";
 import styles from "./Products.module.scss";
 
@@ -25,70 +25,45 @@ const Products: React.FC = () => {
 
   const productStore = useLocalObservable(() => new ProductStore());
   const categoryStore = useLocalObservable(() => new CategoryStore());
+  const includedIds = categoryStore.includedIds;
 
-  const [include, setInclude] = React.useState<Option[]>([]);
   const [substring, setSubstring] = React.useState(
     () => (rootStore.query.getParam("substring") as string) || ""
   );
 
-  const includeIds: string = React.useMemo(
-    () =>
-      include.reduce(
-        (query, category) => query + String(category.key) + "|",
-        ""
-      ),
-    [include]
-  );
-
   React.useEffect(() => {
+    const include = searchParams.get(QUERY_PARAM_INCLUDE) || "";
     productStore.getProductsList({
       substring: substring,
-      include: (rootStore.query.getParam("include") as string) || "",
+      include: include,
       page: searchParams.get(QUERY_PARAM_PAGE) || "1",
     });
 
     productStore.getLength({
       substring,
-      include: (rootStore.query.getParam("include") as string) || "",
+      include: include,
     });
 
-    const fetchCategories = async () => {
-      await categoryStore.getCategoriesList();
-      setInclude(() =>
-        ((rootStore.query.getParam("include") as string) || "")
-          .split("|")
-          .filter((id) => id.trim() !== "")
-          .map((el) => ({
-            key: el,
-            value: categoryStore.collectionList.entities[el].name,
-          }))
-      );
-    };
-    fetchCategories();
+    categoryStore.getCategoriesList(include);
   }, []);
 
   const handleSubmit = React.useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      setSearchParams(`?substring=${substring}&include=${includeIds}&page=1`);
+      setSearchParams(
+        `?substring=${substring.toLowerCase()}&include=${includedIds}&page=1`
+      );
+
       productStore.getLength({
         substring,
-        include: includeIds,
+        include: includedIds,
       });
     },
 
-    [setSearchParams, substring, includeIds, productStore]
+    [setSearchParams, substring, includedIds, productStore]
   );
 
-  const OPTIONS = React.useMemo(
-    () =>
-      categoryStore.list!.map((category) => ({
-        key: category.id,
-        value: category.name,
-      })),
-    [categoryStore.list]
-  );
   return (
     <>
       <PageLabel
@@ -117,9 +92,9 @@ to see our old products please enter the name of the item"
           </div>
           <MultiDropdown
             className={styles["multi-dropdown"]}
-            options={OPTIONS}
-            onChange={setInclude}
-            value={include}
+            options={categoryStore.options}
+            onChange={categoryStore.setIncluded}
+            value={toJS(categoryStore.included)}
             getTitle={(elements: Option[]) =>
               elements.length === 0
                 ? "Choose category"
@@ -140,9 +115,16 @@ to see our old products please enter the name of the item"
           </Text>
         </div>
         <div className={styles.products}>
-          {productStore.meta === Meta.loading && (
-            <CardSkeleton className={styles.product} amount={12} />
-          )}
+          {productStore.meta === Meta.loading &&
+            Array(12)
+              .fill(0)
+              .map((_, index) => (
+                <Card
+                  className={styles.product}
+                  loading
+                  key={`card-skeleton-${index}`}
+                />
+              ))}
           {productStore?.list.map((product) => (
             <Card
               key={product.id}
@@ -154,14 +136,14 @@ to see our old products please enter the name of the item"
               image={product.images[0]}
               actionSlot={<Button>Add to cart</Button>}
               className={styles.product}
-            ></Card>
+            />
           ))}
         </div>
       </div>
       <Pagination
         searchParams={searchParams}
         setSearchParams={setSearchParams}
-        itemsLength={productStore.length}
+        itemsLength={toJS(productStore.length)}
         pagesToShow={3}
       />
     </>
