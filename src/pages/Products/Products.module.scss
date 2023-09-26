@@ -1,12 +1,12 @@
 @use "@variables" as *;
 @use "@mixins" as *;
 
-.products_page {
-  margin: $space-xl auto;
+.products-page {
   @include page;
 }
 
-.search_container {
+.search-container {
+  padding-top: $space-xl;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

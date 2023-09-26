@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProductInfo from "components/ProductInfo";
 import RelatedItems from "components/RelatedItems";
 import Text, { TextView } from "components/Text";
+import WithSkeleton from "components/WithSkeleton";
 import { Meta } from "config/globalEnums";
 import ProductStore from "store/ProductStore";
 import ProductsStore from "store/ProductsStore";
@@ -32,12 +33,14 @@ const Product: React.FC = () => {
         <ArrowLeft style={{ strokeWidth: "1.5" }} />
         <Text view={TextView.p20}>Back</Text>
       </div>
-      {productStore.meta === Meta.loading ? (
-        <ProductInfo loading product={getInitialProductItemModel()} />
-      ) : (
+      <WithSkeleton
+        showSkeleton={productStore.meta === Meta.loading}
+        skeleton={
+          <ProductInfo loading product={getInitialProductItemModel()} />
+        }
+      >
         <ProductInfo product={productStore.product} />
-      )}
-
+      </WithSkeleton>
       <RelatedItems productsStore={productsStore} title="Related Items" />
     </div>
   );

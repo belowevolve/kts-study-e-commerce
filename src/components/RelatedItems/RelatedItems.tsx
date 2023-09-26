@@ -6,6 +6,7 @@ import Button from "components/Button";
 import Card from "components/Card";
 
 import Text, { TextView } from "components/Text";
+import WithSkeleton from "components/WithSkeleton";
 import { Meta } from "config/globalEnums";
 import ProductsStore from "store/ProductsStore";
 import styles from "./RelatedItems.module.scss";
@@ -30,8 +31,9 @@ const RelatedItems: React.FC<RelatedItemsProps> = ({
         </Text>
       )}
       <div className={styles.related__recs}>
-        {productsStore.meta === Meta.loading &&
-          Array(12)
+        <WithSkeleton
+          showSkeleton={productsStore.meta === Meta.loading}
+          skeleton={Array(12)
             .fill(0)
             .map((_, index) => (
               <Card
@@ -40,19 +42,21 @@ const RelatedItems: React.FC<RelatedItemsProps> = ({
                 key={`card-skeleton-${index}`}
               />
             ))}
-        {productsStore.list?.map((product) => (
-          <Card
-            key={product.id}
-            onClick={() => navigate(`/products/${product.id}`)}
-            captionSlot={product.category}
-            title={product.title}
-            subtitle={product.description}
-            contentSlot={`${product.price} $`}
-            image={product.images[0]}
-            actionSlot={<Button>Add to cart</Button>}
-            className={styles.related__recs__product}
-          />
-        ))}
+        >
+          {productsStore.list?.map((product) => (
+            <Card
+              key={product.id}
+              onClick={() => navigate(`/products/${product.id}`)}
+              captionSlot={product.category}
+              title={product.title}
+              subtitle={product.description}
+              contentSlot={`${product.price} $`}
+              image={product.images[0]}
+              actionSlot={<Button>Add to cart</Button>}
+              className={styles.related__recs__product}
+            />
+          ))}
+        </WithSkeleton>
       </div>
     </div>
   );

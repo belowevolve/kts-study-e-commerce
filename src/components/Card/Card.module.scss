@@ -41,10 +41,6 @@
     margin-bottom: $space-xxs;
   }
 
-  &__title {
-    min-height: 2 * $line-height-p20;
-  }
-
   &__subtitle {
     margin-top: $space-xxs;
     min-height: 3 * $line-height-p16;
@@ -53,10 +49,12 @@
   &__footer {
     display: flex;
     align-items: center;
+  }
+  &__content {
     margin-top: $space-m;
   }
-
   &__action {
+    margin-top: $space-m;
     margin-left: auto;
     padding-left: $space-xxs;
   }
@@ -76,10 +74,12 @@
 
   &__skeleton {
     &__content {
+      margin-top: $space-m;
       height: $line-height-p18;
     }
 
     &__action {
+      margin-top: $space-m;
       height: $button-min-height;
     }
   }

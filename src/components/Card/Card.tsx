@@ -51,9 +51,8 @@ const Card: React.FC<CardProps> = ({
       </div>
 
       <div className={styles.card__body}>
-        {!captionSlot || loading ? (
-          <Skeleton className={styles.card__caption} />
-        ) : (
+        {loading && <Skeleton className={styles.card__caption} />}
+        {captionSlot && (
           <Text
             className={styles.card__caption}
             view={TextView.p14}
@@ -78,11 +77,12 @@ const Card: React.FC<CardProps> = ({
           </Text>
         )}
 
-        {loading ? (
+        {loading && (
           <div className={styles.card__subtitle}>
             <Skeleton count={3} />
           </div>
-        ) : (
+        )}
+        {contentSlot && (
           <Text
             className={styles.card__subtitle}
             view={TextView.p16}
@@ -94,28 +94,31 @@ const Card: React.FC<CardProps> = ({
         )}
 
         <div className={styles.card__footer}>
-          {!contentSlot || loading ? (
+          {loading && (
             <Skeleton
               containerClassName={styles["flex-1"]}
               className={styles.card__skeleton__content}
               width={"50%"}
             />
-          ) : (
+          )}
+          {contentSlot && (
             <Text
               view={TextView.p18}
               color={TextColor.primary}
               weight={TextWeight.medium}
+              className={styles.card__content}
             >
               {contentSlot}
             </Text>
           )}
 
-          {loading ? (
+          {loading && (
             <Skeleton
               containerClassName={styles["flex-1"]}
               className={styles.card__skeleton__action}
             />
-          ) : (
+          )}
+          {actionSlot && (
             <div className={styles.card__action}>{actionSlot}</div>
           )}
         </div>

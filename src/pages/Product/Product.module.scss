@@ -2,11 +2,11 @@
 @use "@mixins" as *;
 
 .product-page {
+  @include page;
   margin: calc($space-back/2) auto;
   @include breakpoint(md) {
     margin: $space-back auto;
   }
-  @include page;
 }
 
 .back {
