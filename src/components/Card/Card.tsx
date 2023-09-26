@@ -1,24 +1,28 @@
 import * as React from "react";
+import Skeleton from "react-loading-skeleton";
 import Text, { TextView, TextColor, TextWeight } from "../Text";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import styles from "./Card.module.scss";
 export type CardProps = {
   /** Дополнительный classname */
   className?: string;
   /** URL изображения */
-  image: string;
+  image?: string;
   /** Слот над заголовком */
   captionSlot?: React.ReactNode;
   /** Заголовок карточки */
-  title: React.ReactNode;
+  title?: React.ReactNode;
   /** Описание карточки */
-  subtitle: React.ReactNode;
+  subtitle?: React.ReactNode;
   /** Содержимое карточки (футер/боковая часть), может быть пустым */
   contentSlot?: React.ReactNode;
   /** Клик на карточку */
   onClick?: React.MouseEventHandler;
   /** Слот для действия */
   actionSlot?: React.ReactNode;
+
+  loading?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -30,15 +34,26 @@ const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
+  loading = false,
 }) => {
   return (
     <div className={`${styles.card} ${className}`} onClick={onClick}>
       <div className={styles.card__header}>
-        <img className={styles["card__card-img"]} src={image} alt="" />
+        {loading ? (
+          <Skeleton
+            inline={true}
+            className={styles["card__card-img"]}
+            style={{ position: "absolute" }}
+          />
+        ) : (
+          <img className={styles["card__card-img"]} src={image} alt="" />
+        )}
       </div>
 
       <div className={styles.card__body}>
-        {captionSlot && (
+        {!captionSlot || loading ? (
+          <Skeleton className={styles.card__caption} />
+        ) : (
           <Text
             className={styles.card__caption}
             view={TextView.p14}
@@ -49,27 +64,43 @@ const Card: React.FC<CardProps> = ({
           </Text>
         )}
 
-        <Text
-          className={styles.card__title}
-          view={TextView.p20}
-          color={TextColor.primary}
-          weight={TextWeight.medium}
-          maxLines={2}
-        >
-          {title}
-        </Text>
+        {loading ? (
+          <Skeleton className={styles.card__title} />
+        ) : (
+          <Text
+            className={styles.card__title}
+            view={TextView.p20}
+            color={TextColor.primary}
+            weight={TextWeight.medium}
+            maxLines={2}
+          >
+            {title}
+          </Text>
+        )}
 
-        <Text
-          className={styles.card__subtitle}
-          view={TextView.p16}
-          color={TextColor.secondary}
-          maxLines={3}
-        >
-          {subtitle}
-        </Text>
+        {loading ? (
+          <div className={styles.card__subtitle}>
+            <Skeleton count={3} />
+          </div>
+        ) : (
+          <Text
+            className={styles.card__subtitle}
+            view={TextView.p16}
+            color={TextColor.secondary}
+            maxLines={3}
+          >
+            {subtitle}
+          </Text>
+        )}
 
         <div className={styles.card__footer}>
-          {contentSlot && (
+          {!contentSlot || loading ? (
+            <Skeleton
+              containerClassName={styles["flex-1"]}
+              className={styles.card__skeleton__content}
+              width={"50%"}
+            />
+          ) : (
             <Text
               view={TextView.p18}
               color={TextColor.primary}
@@ -79,7 +110,14 @@ const Card: React.FC<CardProps> = ({
             </Text>
           )}
 
-          <div className={styles.card__action}>{actionSlot}</div>
+          {loading ? (
+            <Skeleton
+              containerClassName={styles["flex-1"]}
+              className={styles.card__skeleton__action}
+            />
+          ) : (
+            <div className={styles.card__action}>{actionSlot}</div>
+          )}
         </div>
       </div>
     </div>

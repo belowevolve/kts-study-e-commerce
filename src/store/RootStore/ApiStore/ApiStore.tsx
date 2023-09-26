@@ -1,12 +1,13 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, isAxiosError } from "axios";
 import { makeObservable, action } from "mobx";
-import { HTTPMethod } from "./config";
+import { HTTPMethod } from "config/globalEnums";
 
 export type ApiResponse<TData, TError> = {
   success: boolean;
   data?: TData;
   error?: TError;
 };
+
 interface RequestConfig extends AxiosRequestConfig {
   method: HTTPMethod;
   endpoint: string;
@@ -35,22 +36,24 @@ class ApiStore {
         baseURL: this.baseUrl,
         headers: headers,
       };
-
-      //When i send data: {}, api return Cross-Origin Request Blocked
       if (Object.keys(data).length > 0) {
         axiosConfig.data = data;
       }
+
       const response: AxiosResponse<TData> = await axios(axiosConfig);
 
       return { success: true, data: response.data };
     } catch (error) {
-      const axiosError = error as AxiosError;
-      return {
-        success: false,
-        error:
-          (axiosError.response?.data as TError) ??
-          (axiosError.message as TError),
-      };
+      if (isAxiosError(error)) {
+        return {
+          success: false,
+          error: error.response?.data ?? error.message,
+        };
+      } else {
+        return {
+          success: false,
+        };
+      }
     }
   }
 }

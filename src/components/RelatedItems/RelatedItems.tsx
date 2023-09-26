@@ -5,23 +5,22 @@ import { useNavigate } from "react-router-dom";
 import Button from "components/Button";
 import Card from "components/Card";
 
-import CardSkeleton from "components/Card/CardSkeleton";
 import Text, { TextView } from "components/Text";
 import { Meta } from "config/globalEnums";
-import ProductStore from "store/ProductStore";
+import ProductsStore from "store/ProductsStore";
 import styles from "./RelatedItems.module.scss";
 
-export type RelatedItemsProps = { title?: string; productStore: ProductStore };
+export type RelatedItemsProps = {
+  title?: string;
+  category?: string;
+  productsStore: ProductsStore;
+};
 
-const RelatedItems: React.FC<RelatedItemsProps> = ({ title, productStore }) => {
+const RelatedItems: React.FC<RelatedItemsProps> = ({
+  title,
+  productsStore,
+}) => {
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    productStore.getProductsList({
-      include: productStore.product.category,
-      page: String(Math.floor(Math.random() * 10) + 1),
-    });
-  }, []);
 
   return (
     <div className={styles.related}>
@@ -31,10 +30,17 @@ const RelatedItems: React.FC<RelatedItemsProps> = ({ title, productStore }) => {
         </Text>
       )}
       <div className={styles.related__recs}>
-        {productStore.meta === Meta.loading && (
-          <CardSkeleton className={styles.related__recs__product} amount={12} />
-        )}
-        {productStore.list?.map((product) => (
+        {productsStore.meta === Meta.loading &&
+          Array(12)
+            .fill(0)
+            .map((_, index) => (
+              <Card
+                className={styles.related__recs__product}
+                loading
+                key={`card-skeleton-${index}`}
+              />
+            ))}
+        {productsStore.list?.map((product) => (
           <Card
             key={product.id}
             onClick={() => navigate(`/products/${product.id}`)}
@@ -45,7 +51,7 @@ const RelatedItems: React.FC<RelatedItemsProps> = ({ title, productStore }) => {
             image={product.images[0]}
             actionSlot={<Button>Add to cart</Button>}
             className={styles.related__recs__product}
-          ></Card>
+          />
         ))}
       </div>
     </div>

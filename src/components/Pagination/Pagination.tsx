@@ -2,9 +2,8 @@ import cn from "classnames";
 import * as React from "react";
 import { SetURLSearchParams } from "react-router-dom";
 import Button from "components/Button";
-import Text, { TextView, TextWeight } from "components/Text";
 import { QUERY_PARAM_PAGE } from "config/searchParams";
-import { PRODUCTS_PER_PAGE } from "store/ProductStore";
+import { PRODUCTS_PER_PAGE } from "store/ProductsStore";
 import ArrowLeft from "styles/svg/arrowLeft.svg";
 import styles from "./Pagination.module.scss";
 
@@ -44,7 +43,7 @@ const Pagination: React.FC<PaginationProps> = ({
     }
   }, [curPage, goToPage, totalPages]);
 
-  const renderPageNumbers = () => {
+  const renderPageNumbers = React.useMemo(() => {
     const pageNumbers = [];
     let startPage = curPage - Math.floor(pagesToShow / 2);
     let endPage = curPage + Math.floor(pagesToShow / 2);
@@ -69,72 +68,71 @@ const Pagination: React.FC<PaginationProps> = ({
             curPage === i && styles.pagination__page_active
           )}
         >
-          <Text view={TextView.p18} weight={TextWeight.medium}>
-            {i}
-          </Text>
+          <span className={styles.pagination__page__text}>{i}</span>
         </Button>
       );
     }
 
     return pageNumbers;
-  };
+  }, [curPage, goToPage, pagesToShow, totalPages]);
 
   return (
-    <div className={styles.pagination}>
-      <Button
-        className={styles.pagination__button}
-        onClick={prevPage}
-        disabled={curPage === 1}
-      >
-        <ArrowLeft style={{ strokeWidth: "1.5" }} />
-      </Button>
-      {curPage - pagesToShow >= 0 && (
-        <>
-          <Button
-            onClick={goToPage(1)}
-            className={cn(
-              styles.pagination__page,
-              curPage === 1 && styles.pagination__page_active
+    totalPages > 1 && (
+      <div className={styles.pagination}>
+        <Button
+          className={styles.pagination__button}
+          onClick={prevPage}
+          disabled={curPage === 1}
+        >
+          <ArrowLeft style={{ strokeWidth: "1.5" }} />
+        </Button>
+        {curPage - pagesToShow >= 0 && totalPages > pagesToShow && (
+          <>
+            <Button
+              onClick={goToPage(1)}
+              className={cn(
+                styles.pagination__page,
+                curPage === 1 && styles.pagination__page_active
+              )}
+            >
+              <span className={styles.pagination__page__text}>1</span>
+            </Button>
+            {curPage - pagesToShow > 0 && (
+              <span className={styles.pagination__page__text}>...</span>
             )}
-          >
-            <Text view={TextView.p18} weight={TextWeight.medium}>
-              1
-            </Text>
-          </Button>
-          <Text view={TextView.p18} weight={TextWeight.medium}>
-            ...
-          </Text>
-        </>
-      )}
-      {renderPageNumbers()}
-      {curPage + pagesToShow <= totalPages + 1 && (
-        <>
-          <Text view={TextView.p18} weight={TextWeight.medium}>
-            ...
-          </Text>
-          <Button
-            onClick={goToPage(totalPages)}
-            className={cn(
-              styles.pagination__page,
-              curPage === totalPages && styles.pagination__page_active
-            )}
-          >
-            <Text view={TextView.p18} weight={TextWeight.medium}>
-              {totalPages}
-            </Text>
-          </Button>
-        </>
-      )}
-      <Button
-        className={styles.pagination__button}
-        onClick={nextPage}
-        disabled={curPage >= totalPages}
-      >
-        <ArrowLeft
-          style={{ transform: "rotate(180deg)", strokeWidth: "1.5" }}
-        />
-      </Button>
-    </div>
+          </>
+        )}
+        {renderPageNumbers}
+        {curPage + pagesToShow / 2 <= totalPages &&
+          totalPages > pagesToShow && (
+            <>
+              {totalPages - pagesToShow / 2 > curPage + 1 && (
+                <span className={styles.pagination__page__text}>...</span>
+              )}
+              <Button
+                onClick={goToPage(totalPages)}
+                className={cn(
+                  styles.pagination__page,
+                  curPage === totalPages && styles.pagination__page_active
+                )}
+              >
+                <span className={styles.pagination__page__text}>
+                  {totalPages}
+                </span>
+              </Button>
+            </>
+          )}
+        <Button
+          className={styles.pagination__button}
+          onClick={nextPage}
+          disabled={curPage >= totalPages}
+        >
+          <ArrowLeft
+            style={{ transform: "rotate(180deg)", strokeWidth: "1.5" }}
+          />
+        </Button>
+      </div>
+    )
   );
 };
 

@@ -18,7 +18,9 @@ import styles from "./Navbar.module.scss";
 const Navbar: React.FC = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = React.useState<boolean>(false);
-  const menuToggler = () => setMenuOpen((p) => !p);
+  const menuToggler = React.useCallback(() => {
+    setMenuOpen((prevMenuOpen) => !prevMenuOpen);
+  }, []);
 
   return (
     <div className={styles.navbar}>

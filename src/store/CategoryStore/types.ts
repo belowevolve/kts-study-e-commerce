@@ -1,3 +1,3 @@
 export interface ICategoryStore {
-  getCategoriesList(): Promise<void>;
+  getCategoriesList(include?: string): Promise<void>;
 }

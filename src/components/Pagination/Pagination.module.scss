@@ -20,7 +20,9 @@
   &__page {
     background: transparent;
     color: $pagination-page-text;
-
+    &__text {
+      font-weight: 500;
+    }
     &:hover {
       color: $pagination-page-text-hover;
       background: transparent !important;
