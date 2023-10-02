@@ -5,14 +5,19 @@
   width: 100%;
 
   display: grid;
-  padding: $space-s;
-  gap: $space-s;
-  grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-xs 1fr;
-  grid-template-rows: auto $line-height-p20 auto;
-  grid-template-areas:
-    "image info info "
-    "image price price-per-unit"
-    "trash .  button ";
+
+  @include mini-cart;
+
+  @include mq(sm) {
+    padding: $space-s;
+    gap: $space-s;
+    grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-xs 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "image info info "
+      "image price price-per-unit "
+      "trash .  button ";
+  }
 
   @include mq(xl) {
     padding: $space-m;
