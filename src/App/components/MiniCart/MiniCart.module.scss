@@ -45,14 +45,7 @@
       overflow-y: scroll;
 
       &_item {
-        padding: $space-xs;
-        gap: $space-xxs;
-        grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-xs 1fr;
-        grid-template-rows: auto $line-height-p20 auto;
-        grid-template-areas:
-          "image info info "
-          "image price price-per-unit"
-          "trash .  button ";
+        @include mini-cart;
       }
     }
   }

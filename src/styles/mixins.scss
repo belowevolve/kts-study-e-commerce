@@ -100,3 +100,15 @@ $breakpoints: (
     color: $brand;
   }
 }
+
+@mixin mini-cart {
+  padding: $space-xs;
+  gap: $space-xxs;
+  grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-xs 1fr;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "image info info "
+    "image price . "
+    "image . price-per-unit"
+    "trash .  button ";
+}
