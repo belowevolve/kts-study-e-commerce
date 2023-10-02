@@ -24,12 +24,12 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={cn(
-        styles.button,
-        className,
-        props.disabled === true && styles.disabled
-      )}
       {...props}
+      className={cn(
+        className,
+        styles.button,
+        props.disabled && styles.button_disabled
+      )}
       disabled={props.disabled || loading}
     >
       {loading && (

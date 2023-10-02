@@ -1,5 +1,6 @@
 import * as React from "react";
 import Skeleton from "react-loading-skeleton";
+import WithSkeleton from "components/WithSkeleton";
 import Text, { TextView, TextColor, TextWeight } from "../Text";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -39,33 +40,41 @@ const Card: React.FC<CardProps> = ({
   return (
     <div className={`${styles.card} ${className}`} onClick={onClick}>
       <div className={styles.card__header}>
-        {loading ? (
-          <Skeleton
-            inline={true}
-            className={styles["card__card-img"]}
-            style={{ position: "absolute" }}
-          />
-        ) : (
+        <WithSkeleton
+          showSkeleton={loading}
+          skeleton={
+            <Skeleton
+              inline={true}
+              className={styles["card__card-img"]}
+              style={{ position: "absolute" }}
+            />
+          }
+        >
           <img className={styles["card__card-img"]} src={image} alt="" />
-        )}
+        </WithSkeleton>
       </div>
 
       <div className={styles.card__body}>
-        {loading && <Skeleton className={styles.card__caption} />}
-        {captionSlot && (
-          <Text
-            className={styles.card__caption}
-            view={TextView.p14}
-            color={TextColor.secondary}
-            weight={TextWeight.medium}
-          >
-            {captionSlot}
-          </Text>
-        )}
+        <WithSkeleton
+          showSkeleton={loading}
+          skeleton={<Skeleton className={styles.card__caption} />}
+        >
+          {captionSlot && (
+            <Text
+              className={styles.card__caption}
+              view={TextView.p14}
+              color={TextColor.secondary}
+              weight={TextWeight.medium}
+            >
+              {captionSlot}
+            </Text>
+          )}
+        </WithSkeleton>
 
-        {loading ? (
-          <Skeleton className={styles.card__title} />
-        ) : (
+        <WithSkeleton
+          showSkeleton={loading}
+          skeleton={<Skeleton className={styles.card__title} />}
+        >
           <Text
             className={styles.card__title}
             view={TextView.p20}
@@ -75,52 +84,76 @@ const Card: React.FC<CardProps> = ({
           >
             {title}
           </Text>
-        )}
+        </WithSkeleton>
 
-        {loading && (
-          <div className={styles.card__subtitle}>
-            <Skeleton count={3} />
-          </div>
-        )}
-        {contentSlot && (
-          <Text
-            className={styles.card__subtitle}
-            view={TextView.p16}
-            color={TextColor.secondary}
-            maxLines={3}
-          >
-            {subtitle}
-          </Text>
-        )}
-
-        <div className={styles.card__footer}>
-          {loading && (
-            <Skeleton
-              containerClassName={styles["flex-1"]}
-              className={styles.card__skeleton__content}
-              width={"50%"}
-            />
-          )}
+        <WithSkeleton
+          showSkeleton={loading}
+          skeleton={
+            <div className={styles.card__subtitle}>
+              <Skeleton count={3} />
+            </div>
+          }
+        >
           {contentSlot && (
             <Text
-              view={TextView.p18}
-              color={TextColor.primary}
-              weight={TextWeight.medium}
-              className={styles.card__content}
+              className={styles.card__subtitle}
+              view={TextView.p16}
+              color={TextColor.secondary}
+              maxLines={3}
             >
-              {contentSlot}
+              {subtitle}
             </Text>
           )}
+        </WithSkeleton>
 
-          {loading && (
-            <Skeleton
-              containerClassName={styles["flex-1"]}
-              className={styles.card__skeleton__action}
-            />
-          )}
-          {actionSlot && (
-            <div className={styles.card__action}>{actionSlot}</div>
-          )}
+        <div
+          className={styles.card__footer}
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
+          <WithSkeleton
+            showSkeleton={loading}
+            skeleton={
+              <Skeleton
+                containerClassName={styles["flex-1"]}
+                className={styles.card__skeleton__content}
+                width={"50%"}
+              />
+            }
+          >
+            {contentSlot && (
+              <Text
+                view={TextView.p18}
+                color={TextColor.primary}
+                weight={TextWeight.medium}
+                className={styles.card__content}
+              >
+                {contentSlot}
+              </Text>
+            )}
+          </WithSkeleton>
+
+          <WithSkeleton
+            showSkeleton={loading}
+            skeleton={
+              <Skeleton
+                containerClassName={styles["flex-1"]}
+                className={styles.card__skeleton__action}
+              />
+            }
+          >
+            {actionSlot && (
+              <div
+                className={styles.card__action}
+                onClick={(event) => {
+                  event.stopPropagation();
+                }}
+              >
+                {actionSlot}
+              </div>
+            )}
+          </WithSkeleton>
         </div>
       </div>
     </div>

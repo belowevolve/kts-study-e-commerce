@@ -6,11 +6,12 @@
   display: flex;
   flex-direction: column;
   gap: $space-s;
-  @include breakpoint(md) {
+  @include mq(lg) {
     gap: $space-l;
   }
+
   &__text {
-    font-size: 32px;
+    font-size: $related-font-size;
   }
 
   &__recs {
@@ -21,13 +22,13 @@
     padding: $space-xs;
     margin: -$space-xs;
     gap: $space-s;
-    @include breakpoint(md) {
+    @include mq(lg) {
       gap: $space-l;
     }
     &__product {
-      min-width: 250px;
-      @include breakpoint(md) {
-        min-width: 360px;
+      min-width: $related-item-max-width-s;
+      @include mq(lg) {
+        min-width: $related-item-max-width;
       }
     }
   }

@@ -5,19 +5,17 @@ import {
   action,
   runInAction,
 } from "mobx";
-
-import { PRODUCT_BY_ID_ENDPOINT } from "config/endpoints";
+import { API_ENDPOINTS } from "config/api";
 import { Meta, HTTPMethod } from "config/globalEnums";
-
 import rootStore from "store/RootStore/instance";
 import {
   ProductItemApi,
   ProductItemModel,
   getInitialProductItemModel,
   normalizeProductItem,
-} from "store/models/product";
+} from "store/models/products";
 import { ILocalStore } from "utils/useLocalStore";
-import { IProductStore } from "./types";
+import { GetProductParams, IProductStore } from "./types";
 
 type PrivateFields = "_product" | "_meta";
 
@@ -43,14 +41,14 @@ export default class ProductStore implements IProductStore, ILocalStore {
     return this._meta;
   }
 
-  async getProduct(id: string): Promise<void> {
+  async getProduct(params: GetProductParams): Promise<void> {
     this._meta = Meta.loading;
     this._product = getInitialProductItemModel();
     const response = await rootStore.productApi.request<ProductItemApi>({
       method: HTTPMethod.GET,
       data: {},
       headers: {},
-      endpoint: PRODUCT_BY_ID_ENDPOINT(id),
+      endpoint: API_ENDPOINTS.PRODUCT_BY_ID(params.id),
     });
     runInAction(() => {
       if (!response.success) {

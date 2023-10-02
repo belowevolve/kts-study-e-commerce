@@ -4,21 +4,21 @@
   width: $loader-l;
   height: $loader-l;
   margin: $loader-l-margin;
-  border: 5px solid $brand;
+  border: $loader-l-border solid $brand;
 }
 
 .loader_size_m {
   width: $loader-m;
   height: $loader-m;
   margin: $loader-m-margin;
-  border: 4px solid $brand;
+  border: $loader-m-border solid $brand;
 }
 
 .loader_size_s {
   width: $loader-s;
   height: $loader-s;
   margin: $loader-s-margin;
-  border: 2px solid $brand;
+  border: $loader-s-border solid $brand;
 }
 
 .loader {

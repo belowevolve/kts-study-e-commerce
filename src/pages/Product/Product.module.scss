@@ -4,7 +4,7 @@
 .product-page {
   @include page;
   margin: calc($space-back/2) auto;
-  @include breakpoint(md) {
+  @include mq(lg) {
     margin: $space-back auto;
   }
 }

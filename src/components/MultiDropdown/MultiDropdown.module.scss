@@ -2,7 +2,8 @@
 
 .dropdown {
   position: relative;
-
+  min-width: $dropdown-min-width;
+  max-width: 100%;
   &__options {
     width: 100%;
     position: absolute;

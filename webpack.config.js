@@ -43,7 +43,6 @@ module.exports = {
   output: {
     path: buildPath,
     filename: "bundle.js",
-    publicPath: "/",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -57,6 +56,7 @@ module.exports = {
         filename: "[name]-[hash].css",
       }),
   ].filter(Boolean),
+
   module: {
     rules: [
       {
@@ -89,12 +89,14 @@ module.exports = {
       },
     ],
   },
+
   devServer: {
     host: "localhost",
     port: 3000,
     hot: true,
     historyApiFallback: true,
   },
+
   resolve: {
     extensions: [".tsx", ".jsx", ".js", ".ts"],
     alias: {

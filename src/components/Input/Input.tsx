@@ -7,7 +7,7 @@ export type InputProps = Omit<
   "onChange" | "value"
 > & {
   /** Значение поля */
-  value: string;
+  value?: string;
   /** Callback, вызываемый при вводе данных в поле */
   onChange: (value: string) => void;
   /** Слот для иконки справа */
@@ -24,6 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
     },
     [onChange]
   );
+
   return (
     <label className={cn(styles["input-container"], props.className)}>
       <input

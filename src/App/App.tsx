@@ -3,10 +3,11 @@ import {
   Route,
   Navigate,
   RouterProvider,
-  createBrowserRouter,
   createRoutesFromElements,
+  createHashRouter,
 } from "react-router-dom";
 
+import { ROUTES } from "config/routes";
 import About from "pages/About";
 import Cart from "pages/Cart";
 import Categories from "pages/Categories";
@@ -18,16 +19,19 @@ import Main from "./components/Main";
 const App: React.FC = () => {
   return (
     <RouterProvider
-      router={createBrowserRouter(
+      router={createHashRouter(
         createRoutesFromElements(
           <Route element={<Main />}>
-            <Route path="/products" element={<Products />} />
-            <Route path="products/:id" element={<Product />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/user" element={<User />} />
-            <Route path="*" element={<Navigate to="/products" replace />} />
+            <Route path={ROUTES.PRODUCTS.index} element={<Products />} />
+            <Route path={ROUTES.PRODUCTS.ID} element={<Product />} />
+            <Route path={ROUTES.CATEGORIES} element={<Categories />} />
+            <Route path={ROUTES.ABOUT} element={<About />} />
+            <Route path={ROUTES.CART} element={<Cart />} />
+            <Route path={ROUTES.USER} element={<User />} />
+            <Route
+              path="*"
+              element={<Navigate to={ROUTES.PRODUCTS.index} replace />}
+            />
           </Route>
         )
       )}

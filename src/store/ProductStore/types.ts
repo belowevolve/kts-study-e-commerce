@@ -3,5 +3,5 @@ export type GetProductParams = {
 };
 
 export interface IProductStore {
-  getProduct(id: string): Promise<void>;
+  getProduct(params: GetProductParams): Promise<void>;
 }

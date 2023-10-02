@@ -8,25 +8,33 @@
   background: $brand;
   white-space: nowrap;
   color: $button-primary-text;
-  transition: 0.3s ease padding;
-  @include breakpoint(md) {
+  cursor: pointer;
+  transition:
+    padding 0.3s ease,
+    background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include mq(sm) {
     padding: $space-s $space-l;
   }
-}
 
-.button:hover:enabled {
-  background: $brand-hover;
-}
+  &:hover:enabled {
+    background-color: $brand-hover;
+  }
 
-.button:active:enabled {
-  background: $brand-active;
-}
+  &:active:enabled {
+    background: $brand-active;
+  }
+  &:disabled {
+    pointer-events: none;
+  }
+  &_disabled {
+    background: $button-primary-bg-disabled;
+  }
 
-.disabled {
-  background: $button-primary-bg-disabled;
-}
-
-.button__loader {
-  border-color: $button-loader;
-  border-right-color: transparent;
+  &__loader {
+    border-color: $button-loader;
+    border-right-color: transparent;
+  }
 }

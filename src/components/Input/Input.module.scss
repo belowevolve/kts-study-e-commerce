@@ -3,20 +3,20 @@
 .input-container {
   display: flex;
   width: 100%;
-  height: 52px;
+  height: $input-height;
   align-items: center;
 
   padding: $space-s $space-xs;
   gap: $space-xxs;
 
   border-radius: $border-radius;
-  border: 1px solid $input-border;
+  border: $input-border;
   background: $input-bg;
 }
 
 .input-field {
   border-radius: $border-radius;
-  border: 1px solid $input-border;
+  border: $input-border;
   outline: 0;
   width: 100%;
 }
@@ -25,5 +25,5 @@
   background: $input-bg-disabled;
 }
 .input-container:focus-within {
-  border: 1px solid $input-border-focus;
+  border: $input-border-focus;
 }
