@@ -40,7 +40,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const [isOpen, setIsOpen] = React.useState(false);
   const [isTyping, setIsTyping] = React.useState(false);
   const [filter, setFilter] = React.useState("");
-
+  const [width, setWidth] = React.useState(0);
   const isAlreadySelected = (selectedOption: Option) => {
     selectedOption.key = selectedOption.key.toString();
     return value.some((option) => option.key === selectedOption.key);
@@ -103,6 +103,10 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   const title = React.useMemo(() => getTitle(value), [getTitle, value]);
 
+  React.useEffect(() => {
+    setWidth(title.length * 7);
+  }, [title.length]);
+
   const inputValue = React.useMemo(() => {
     if (!isOpen) {
       if (value.length === 0) {
@@ -124,6 +128,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         disabled && styles.dropdown_disabled,
         className
       )}
+      style={{ width }}
       ref={rootRef}
     >
       <Input

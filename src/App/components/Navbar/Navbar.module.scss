@@ -10,20 +10,20 @@
   width: 100%;
 
   &__content {
-    max-width: 1920px;
+    max-width: $mq-xxl;
     height: 100%;
     margin: 0 auto;
 
     padding: 0 $space-s;
     transition: 0.3s ease padding;
-    @include breakpoint(md) {
+    @include mq(lg) {
       padding: 0 $navbar-padding;
     }
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid $navbar-line;
+    border-bottom: $navbar-line;
   }
 
   &__toggler {
@@ -31,14 +31,12 @@
     background-color: $navbar-bg;
     border: 0;
     padding: 0;
-    @include breakpoint(md) {
+    @include mq(lg) {
       display: none;
     }
-    & > svg {
-      font-size: 30px;
-      &:hover {
-        color: $brand;
-      }
+    &__svg {
+      font-size: $navbar-svg-size;
+      @include hover-brand;
     }
   }
 
@@ -47,14 +45,9 @@
     justify-content: flex-end;
     align-items: center;
     gap: $space-s;
-    @include breakpoint(md) {
-      gap: $space-xl;
-    }
 
-    & > svg {
-      &:hover {
-        color: $brand;
-      }
+    @include mq(lg) {
+      gap: $space-xl;
     }
   }
 }
@@ -66,7 +59,7 @@
 }
 
 .nav {
-  width: 30%;
+  width: 40%;
   position: fixed;
   top: $navbar-height;
   right: -100%;
@@ -81,7 +74,7 @@
     right: 0;
   }
 
-  @include breakpoint(md) {
+  @include mq(lg) {
     position: static;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -90,8 +83,4 @@
     padding: 0;
     box-shadow: none;
   }
-}
-
-.active {
-  color: $brand;
 }

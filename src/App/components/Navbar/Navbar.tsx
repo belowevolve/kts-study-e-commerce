@@ -1,16 +1,14 @@
 import cn from "classnames";
 import * as React from "react";
-
 import { AiOutlineCloseSquare } from "react-icons/ai";
-
 import { Link, useLocation } from "react-router-dom";
-
-import { navLinks } from "config/navLinks";
-import Cart from "styles/svg/cart.svg";
+import { navItemsLinks } from "config/navItemsLinks";
+import { ROUTES } from "config/routes";
 import Logo from "styles/svg/logo.svg";
 import LogoName from "styles/svg/logoName.svg";
 import MenuRight from "styles/svg/menuRight.svg";
 import User from "styles/svg/user.svg";
+import MiniCart from "../MiniCart";
 import NavbarItem from "../NavbarItem";
 import navItemStyles from "../NavbarItem/NavbarItem.module.scss";
 import styles from "./Navbar.module.scss";
@@ -34,7 +32,7 @@ const Navbar: React.FC = () => {
 
         <div>
           <div className={cn(styles.nav, menuOpen ? styles["nav--open"] : "")}>
-            {Object.entries(navLinks).map(([label, to]) => (
+            {Object.entries(navItemsLinks).map(([label, to]) => (
               <NavbarItem
                 key={to}
                 to={to}
@@ -46,26 +44,22 @@ const Navbar: React.FC = () => {
         </div>
         <div>
           <div className={styles["navbar__user-container"]}>
+            <MiniCart pathName={location.pathname} />
             <Link
               className={cn(
                 navItemStyles.nav__item,
-                location.pathname === "/cart" ? styles.active : ""
+                location.pathname === ROUTES.USER ? navItemStyles.active : ""
               )}
-              to="/cart"
+              to={ROUTES.USER}
             >
-              <Cart />
-            </Link>
-            <Link
-              className={cn(
-                navItemStyles.nav__item,
-                location.pathname === "/user" ? styles.active : ""
-              )}
-              to="/user"
-            >
-              <User />
+              <User className={styles["navbar__user-container__svg"]} />
             </Link>
             <button className={styles.navbar__toggler} onClick={menuToggler}>
-              {!menuOpen ? <MenuRight /> : <AiOutlineCloseSquare />}
+              {!menuOpen ? (
+                <MenuRight className={styles.navbar__toggler__svg} />
+              ) : (
+                <AiOutlineCloseSquare className={styles.navbar__toggler__svg} />
+              )}
             </button>
           </div>
         </div>

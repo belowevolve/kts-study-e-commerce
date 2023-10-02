@@ -1,9 +1,10 @@
 @use "@variables" as *;
+@use "@mixins" as *;
 
 .card {
   cursor: pointer;
   width: 100%;
-  max-width: 360px;
+  max-width: $card-max-width;
   background: $card-bg;
   border-radius: $border-radius;
   overflow: hidden;
@@ -13,24 +14,11 @@
   }
 
   &__header {
-    position: relative;
-    background: $card-image-bg;
-
-    &::after {
-      content: "";
-      padding-top: 100%;
-      display: block;
-    }
+    @include image-container;
   }
 
   &__card-img {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-
-    z-index: 1;
-    top: 0;
-    left: 0;
+    @include image;
   }
 
   &__body {
@@ -59,7 +47,7 @@
     padding-left: $space-xxs;
   }
 
-  @media (max-width: 550px) {
+  @include mq(sm, max) {
     .card__footer {
       display: flex;
       flex-direction: column;
@@ -87,7 +75,7 @@
 
 .flex-1 {
   flex: 1;
-  @media (max-width: 550px) {
+  @include mq(sm, max) {
     min-width: 100%;
   }
 }

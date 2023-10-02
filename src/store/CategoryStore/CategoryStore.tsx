@@ -6,7 +6,7 @@ import {
   runInAction,
 } from "mobx";
 import { Option } from "components/MultiDropdown";
-import { CATEGORIES_ENDPOINT } from "config/endpoints";
+import { API_ENDPOINTS } from "config/api";
 import { Meta, HTTPMethod } from "config/globalEnums";
 
 import rootStore from "store/RootStore/instance";
@@ -14,7 +14,7 @@ import {
   CategoryItemApi,
   CategoryItemModel,
   normalizeCategoryItem,
-} from "store/models/product";
+} from "store/models/products";
 import {
   CollectionModel,
   getInitialCollectionModel,
@@ -97,7 +97,7 @@ export default class CategoryStore implements ICategoryStore, ILocalStore {
       method: HTTPMethod.GET,
       data: {},
       headers: {},
-      endpoint: CATEGORIES_ENDPOINT,
+      endpoint: API_ENDPOINTS.CATEGORIES,
     });
 
     runInAction(() => {

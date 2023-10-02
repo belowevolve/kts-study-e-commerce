@@ -1,29 +1,23 @@
-import { observer, useLocalObservable } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ProductInfo from "components/ProductInfo";
 import RelatedItems from "components/RelatedItems";
 import Text, { TextView } from "components/Text";
 import WithSkeleton from "components/WithSkeleton";
 import { Meta } from "config/globalEnums";
 import ProductStore from "store/ProductStore";
-import ProductsStore from "store/ProductsStore";
-import { getInitialProductItemModel } from "store/models/product";
+import { getInitialProductItemModel } from "store/models/products";
 import ArrowLeft from "styles/svg/arrowLeft.svg";
-
+import { useLocalStore } from "utils/useLocalStore";
+import ProductInfo from "./components/ProductInfo";
 import styles from "./Product.module.scss";
 
 const Product: React.FC = () => {
   const { id } = useParams();
-  const productStore = useLocalObservable(() => new ProductStore());
-  const productsStore = useLocalObservable(() => new ProductsStore());
-
+  const productStore = useLocalStore(() => new ProductStore());
   React.useEffect(() => {
-    productStore.getProduct(id || "");
-    productsStore.getProductsList({
-      page: String(Math.floor(Math.random() * 10) + 1),
-    });
-  }, [id]);
+    productStore.getProduct({ id: id || "" });
+  }, [id, productStore]);
 
   const navigate = useNavigate();
 
@@ -35,13 +29,11 @@ const Product: React.FC = () => {
       </div>
       <WithSkeleton
         showSkeleton={productStore.meta === Meta.loading}
-        skeleton={
-          <ProductInfo loading product={getInitialProductItemModel()} />
-        }
+        skeleton={<ProductInfo product={getInitialProductItemModel()} />}
       >
         <ProductInfo product={productStore.product} />
       </WithSkeleton>
-      <RelatedItems productsStore={productsStore} title="Related Items" />
+      <RelatedItems id={id} title="Related Items" />
     </div>
   );
 };

@@ -8,14 +8,14 @@ import {
   reaction,
 } from "mobx";
 
-import { PRODUCTS_ENDPOINT } from "config/endpoints";
+import { API_ENDPOINTS } from "config/api";
 import { Meta, HTTPMethod } from "config/globalEnums";
 import rootStore from "store/RootStore/instance";
 import {
   ProductItemApi,
   ProductItemModel,
   normalizeProductItem,
-} from "store/models/product";
+} from "store/models/products";
 import {
   CollectionModel,
   getInitialCollectionModel,
@@ -67,7 +67,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
       method: HTTPMethod.GET,
       data: {},
       headers: {},
-      endpoint: PRODUCTS_ENDPOINT(params),
+      endpoint: API_ENDPOINTS.PRODUCTS(params),
     });
 
     runInAction(() => {
@@ -98,7 +98,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
       method: HTTPMethod.GET,
       data: {},
       headers: {},
-      endpoint: PRODUCTS_ENDPOINT(params),
+      endpoint: API_ENDPOINTS.PRODUCTS(params),
     });
     runInAction(() => {
       if (!response.success) {
@@ -113,7 +113,7 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => rootStore.query.params,
     (params) => {
-      this.getProductsList(params);
+      setTimeout(() => this.getProductsList(params), 0);
     }
   );
 

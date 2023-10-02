@@ -1,8 +1,8 @@
 @use "@variables" as *;
 
 .slider {
-  max-width: 600px;
-  max-height: 600px;
+  max-width: $slider-size;
+  max-height: $slider-size;
 
   &__left {
     cursor: pointer;
@@ -26,5 +26,11 @@
   &__right {
     @extend .slider__left;
     right: 0;
+  }
+  &__bullet {
+    &:hover {
+      background: $brand !important;
+      border: $slider-bullet-border !important;
+    }
   }
 }

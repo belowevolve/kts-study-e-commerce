@@ -1,7 +1,7 @@
 @use "@variables" as *;
 
 .text {
-  border-radius: var(--border-radius, 0px);
+  border-radius: $border-radius;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
