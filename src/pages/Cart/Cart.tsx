@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
+import AnimationPage from "components/AnimationPage";
 import PageLabel from "components/PageLabel";
 import RelatedItems from "components/RelatedItems";
 import WithSkeleton from "components/WithSkeleton";
@@ -15,7 +16,7 @@ const Cart: React.FC = () => {
     rootStore.cartStore.totalItems === 0 &&
     rootStore.cartStore.meta !== Meta.loading;
   return (
-    <div className={styles["cart-page"]}>
+    <AnimationPage className={styles["cart-page"]}>
       <PageLabel
         title="Cart"
         description={cartEmptyAndNotLoading ? "Your cart is empty" : " "}
@@ -45,7 +46,7 @@ const Cart: React.FC = () => {
       </div>
 
       <RelatedItems id={""} title="You might Like" />
-    </div>
+    </AnimationPage>
   );
 };
 

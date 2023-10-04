@@ -19,6 +19,7 @@ $navbar-cart-total-position: -2px;
 $navbar-cart-total-border-radius: 8px;
 $navbar-cart-total-text-padding: 0 4px;
 $navbar-active-line-height: 3px;
+$navbar-logo-size: 42px;
 $mini-cart-fake-padding: 40px;
 $mini-cart-container-height: 500px;
 $mini-cart-items-height: 300px;
@@ -94,6 +95,7 @@ $slider-button-color: white;
 $slider-button-size: 60px;
 $slider-bullet-border: 1px solid $brand;
 $slider-size: 600px;
+$slider-correction: -1px;
 
 $space-xl: 48px;
 $space-l: 32px;
@@ -152,3 +154,6 @@ $related-item-max-width: $card-max-width;
 $related-item-max-width-s: 250px;
 
 $products-total-font-size: 32px;
+
+$about-logo-size: 360px;
+$about-main-max-width: 1160px;

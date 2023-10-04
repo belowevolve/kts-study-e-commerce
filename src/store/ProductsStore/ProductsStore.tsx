@@ -65,8 +65,6 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
 
     const response = await rootStore.productApi.request<ProductItemApi[]>({
       method: HTTPMethod.GET,
-      data: {},
-      headers: {},
       endpoint: API_ENDPOINTS.PRODUCTS(params),
     });
 
@@ -81,8 +79,8 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
           list.push(normalizeProductItem(item));
         }
 
-        this._meta = Meta.success;
         this._list = normalizeCollection(list, (listItem) => listItem.id);
+        this._meta = Meta.success;
         return;
       } catch (e) {
         this._meta = Meta.error;
@@ -96,8 +94,6 @@ export default class ProductsStore implements IProductsStore, ILocalStore {
     this._length = 0;
     const response = await rootStore.productApi.request<ProductItemApi[]>({
       method: HTTPMethod.GET,
-      data: {},
-      headers: {},
       endpoint: API_ENDPOINTS.PRODUCTS(params),
     });
     runInAction(() => {

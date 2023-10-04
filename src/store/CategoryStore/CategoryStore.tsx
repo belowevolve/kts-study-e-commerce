@@ -95,8 +95,6 @@ export default class CategoryStore implements ICategoryStore, ILocalStore {
 
     const response = await rootStore.productApi.request<CategoryItemApi[]>({
       method: HTTPMethod.GET,
-      data: {},
-      headers: {},
       endpoint: API_ENDPOINTS.CATEGORIES,
     });
 

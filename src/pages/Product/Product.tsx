@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import AnimationPage from "components/AnimationPage";
 import RelatedItems from "components/RelatedItems";
 import Text, { TextView } from "components/Text";
 import WithSkeleton from "components/WithSkeleton";
@@ -15,14 +16,14 @@ import styles from "./Product.module.scss";
 const Product: React.FC = () => {
   const { id } = useParams();
   const productStore = useLocalStore(() => new ProductStore());
+
   React.useEffect(() => {
     productStore.getProduct({ id: id || "" });
   }, [id, productStore]);
 
   const navigate = useNavigate();
-
   return (
-    <div className={styles["product-page"]}>
+    <AnimationPage className={styles["product-page"]}>
       <div className={styles.back} onClick={() => navigate(-1)}>
         <ArrowLeft style={{ strokeWidth: "1.5" }} />
         <Text view={TextView.p20}>Back</Text>
@@ -34,7 +35,7 @@ const Product: React.FC = () => {
         <ProductInfo product={productStore.product} />
       </WithSkeleton>
       <RelatedItems id={id} title="Related Items" />
-    </div>
+    </AnimationPage>
   );
 };
 

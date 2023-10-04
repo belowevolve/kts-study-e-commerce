@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
       <div className={styles.navbar__content}>
         <div>
           <Link to="/" className={styles.logo}>
-            <Logo />
+            <Logo className={styles.logo__svg} />
             <LogoName />
           </Link>
         </div>
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                 navItemStyles.nav__item,
                 location.pathname === ROUTES.USER ? navItemStyles.active : ""
               )}
-              to={ROUTES.USER}
+              to={ROUTES.PRODUCTS.index}
             >
               <User className={styles["navbar__user-container__svg"]} />
             </Link>

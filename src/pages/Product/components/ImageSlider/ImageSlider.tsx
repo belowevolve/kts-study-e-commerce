@@ -3,7 +3,7 @@ import * as React from "react";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import LeftArrow from "styles/svg/arrowLeft.svg";
 import styles from "./ImageSlider.module.scss";
-import "react-image-gallery/styles/css/image-gallery.css";
+import "react-image-gallery/styles/scss/image-gallery.scss";
 
 export type ImageSliderProps = {
   images: readonly ReactImageGalleryItem[];
@@ -21,7 +21,8 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images, className }) => {
         }
         items={images}
         infinite={false}
-        slideDuration={200}
+        slideDuration={450}
+        lazyLoad={true}
         renderLeftNav={(onClick, disabled) => (
           <button
             className={styles.slider__left}

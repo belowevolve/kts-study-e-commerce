@@ -6,7 +6,7 @@
   margin-top: $space-l;
   display: flex;
   gap: $space-xl;
-  @include mq(md, max) {
+  @include mq(lg, max) {
     flex-direction: column;
     & > &__slider,
     &__info,
@@ -16,6 +16,13 @@
       min-height: 100%;
       max-height: unset;
     }
+  }
+  &__slider {
+    align-self: center;
+    flex: 1;
+    margin-right: $slider-correction;
+    max-width: $slider-size;
+    max-height: $slider-size;
   }
 
   &__info {

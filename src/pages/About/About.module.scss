@@ -1,0 +1,46 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.about-page {
+  @include page;
+}
+
+.about {
+  display: flex;
+  margin-top: -$space-l;
+  flex-direction: column;
+  @include mq(lg) {
+    margin: $space-l auto;
+    max-width: $about-main-max-width;
+    flex-direction: row;
+  }
+
+  &_b {
+    color: $brand;
+    &-tab {
+      color: $brand;
+      display: inline-block;
+      margin-left: $space-m;
+    }
+  }
+
+  &__logo {
+    align-self: center;
+    min-width: $about-logo-size;
+    @include square($about-logo-size);
+  }
+
+  &__main {
+    &__sub-title {
+      padding: $space-l $space-s;
+      display: flex;
+      flex-direction: column;
+      gap: $space-m;
+    }
+  }
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+}

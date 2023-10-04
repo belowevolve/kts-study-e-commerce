@@ -48,6 +48,11 @@ $breakpoints: (
   }
 }
 
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
 @mixin page {
   margin: $space-xl auto;
   max-width: 1920px;

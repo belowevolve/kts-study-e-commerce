@@ -5,6 +5,7 @@ import Input from "../Input";
 import Text, { TextView } from "../Text";
 import ArrowDownIcon from "../icons/ArrowDownIcon";
 import styles from "./MultiDropdown.module.scss";
+import { FONT_WIDTH } from "config/globalConstants";
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -104,7 +105,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   const title = React.useMemo(() => getTitle(value), [getTitle, value]);
 
   React.useEffect(() => {
-    setWidth(title.length * 7);
+    setWidth(title.length * FONT_WIDTH);
   }, [title.length]);
 
   const inputValue = React.useMemo(() => {
