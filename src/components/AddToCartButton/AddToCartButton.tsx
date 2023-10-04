@@ -39,18 +39,6 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     }
   }, [id, quantity]);
 
-  const useDecQuantity = React.useCallback(() => {
-    rootStore.cartStore.decQuantity(id);
-  }, [id]);
-
-  const useIncQuantity = React.useCallback(() => {
-    rootStore.cartStore.incQuantity(id);
-  }, [id]);
-
-  const useAddToCart = React.useCallback(() => {
-    rootStore.cartStore.addToCart(product);
-  }, [product]);
-
   return (
     <>
       {quantity > 0 ? (
@@ -58,7 +46,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
           <Button
             className={styles.stepper__button}
             disabled={quantity === 1 && inCart}
-            onClick={useDecQuantity}
+            onClick={() => rootStore.cartStore.decQuantity(id)}
           >
             -
           </Button>
@@ -67,6 +55,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
             ref={inputRef}
             onChange={() => {}}
             onBlur={handleBlur}
+            style={{ textAlign: "center" }}
             onKeyDown={(e) => {
               if (!/^\d$/.test(e.key) && !NUMBER_INPUT_KEYS.includes(e.key)) {
                 e.preventDefault();
@@ -88,13 +77,16 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
           <Button
             className={styles.stepper__button}
             disabled={quantity >= 99 && inCart}
-            onClick={useIncQuantity}
+            onClick={() => rootStore.cartStore.incQuantity(id)}
           >
             +
           </Button>
         </div>
       ) : (
-        <Button className={className} onClick={useAddToCart}>
+        <Button
+          className={className}
+          onClick={() => rootStore.cartStore.addToCart(product)}
+        >
           Add To Cart
         </Button>
       )}

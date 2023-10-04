@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import AnimationPage from "components/AnimationPage";
 import Card from "components/Card";
 import PageLabel from "components/PageLabel";
 import WithSkeleton from "components/WithSkeleton";
@@ -18,7 +19,7 @@ const Categories: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles["categories-page"]}>
+    <AnimationPage className={styles["categories-page"]}>
       <PageLabel title="Categories" description="Choose products by category" />
       <div className={styles.categories}>
         <WithSkeleton
@@ -43,7 +44,7 @@ const Categories: React.FC = () => {
           ))}
         </WithSkeleton>
       </div>
-    </div>
+    </AnimationPage>
   );
 };
 

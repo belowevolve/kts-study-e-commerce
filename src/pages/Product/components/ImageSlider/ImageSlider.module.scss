@@ -1,9 +1,6 @@
 @use "@variables" as *;
 
 .slider {
-  max-width: $slider-size;
-  max-height: $slider-size;
-
   &__left {
     cursor: pointer;
     position: absolute;
@@ -27,10 +24,17 @@
     @extend .slider__left;
     right: 0;
   }
+
   &__bullet {
     &:hover {
       background: $brand !important;
       border: $slider-bullet-border !important;
+    }
+  }
+
+  &__image {
+    & > img {
+      aspect-ratio: 1/1;
     }
   }
 }

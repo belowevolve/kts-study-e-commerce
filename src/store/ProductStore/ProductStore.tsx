@@ -46,10 +46,9 @@ export default class ProductStore implements IProductStore, ILocalStore {
     this._product = getInitialProductItemModel();
     const response = await rootStore.productApi.request<ProductItemApi>({
       method: HTTPMethod.GET,
-      data: {},
-      headers: {},
       endpoint: API_ENDPOINTS.PRODUCT_BY_ID(params.id),
     });
+
     runInAction(() => {
       if (!response.success) {
         this._meta = Meta.error;

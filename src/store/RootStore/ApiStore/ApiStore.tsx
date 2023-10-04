@@ -25,8 +25,8 @@ class ApiStore {
 
   async request<TData, TError = string>({
     method,
-    data,
-    headers,
+    data = {},
+    headers = {},
     endpoint,
   }: RequestConfig): Promise<ApiResponse<TData, TError>> {
     try {

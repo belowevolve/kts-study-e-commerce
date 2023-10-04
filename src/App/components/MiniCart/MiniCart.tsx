@@ -35,7 +35,7 @@ const MiniCart: React.FC<MiniCartProps> = ({ pathName }) => {
         </div>
         <Cart className={styles["mini-cart__svg"]} />
       </Link>
-      {pathName !== ROUTES.CART && (
+      {pathName !== ROUTES.CART && rootStore.cartStore.totalItems > 0 && (
         <div className={styles["mini-cart__container"]}>
           <CartCheckout className={styles["mini-cart__container__checkout"]} />
           <div className={styles["mini-cart__container__items"]}>

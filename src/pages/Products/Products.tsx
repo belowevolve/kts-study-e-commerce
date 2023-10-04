@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import * as React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AddToCartButton from "components/AddToCartButton";
+import AnimationPage from "components/AnimationPage";
 import Button from "components/Button";
 import Card from "components/Card";
 import Input from "components/Input";
@@ -69,7 +70,7 @@ const Products: React.FC = () => {
   );
 
   return (
-    <div className={styles["products-page"]}>
+    <AnimationPage className={styles["products-page"]}>
       <PageLabel
         title="Products"
         description="We display products based on the latest products we have, if you want
@@ -148,7 +149,7 @@ to see our old products please enter the name of the item"
           pagesToShow={3}
         />
       )}
-    </div>
+    </AnimationPage>
   );
 };
 

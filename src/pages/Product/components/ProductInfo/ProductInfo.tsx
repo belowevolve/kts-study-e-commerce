@@ -34,6 +34,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
           className={styles.product__slider}
           images={product.images.map((image) => ({
             original: image,
+            originalClass: sliderStyles.slider__image,
             bulletClass: sliderStyles.slider__bullet,
           }))}
         />

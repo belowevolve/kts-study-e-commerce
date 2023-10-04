@@ -22,12 +22,11 @@ import {
   getInitialCollectionModel,
   linearizeCollection,
 } from "store/models/shared/collection";
-import { ILocalStore } from "utils/useLocalStore";
 import { ICartStore } from "./types";
 
 type PrivateFields = "_cartItems" | "_meta";
 
-export default class CartStore implements ICartStore, ILocalStore {
+export default class CartStore implements ICartStore {
   private _productApi: ApiStore;
   private _meta: Meta = Meta.initial;
   private _cartItems: CollectionModel<number, CartItemModel> =
@@ -160,8 +159,6 @@ export default class CartStore implements ICartStore, ILocalStore {
         cartItems.order.map(async (id) => {
           const response = await this._productApi.request<ProductItemApi>({
             method: HTTPMethod.GET,
-            data: {},
-            headers: {},
             endpoint: API_ENDPOINTS.PRODUCT_BY_ID(id.toString()),
           });
           if (response.success) {
@@ -171,14 +168,16 @@ export default class CartStore implements ICartStore, ILocalStore {
           }
         })
       );
-    } catch (error) {
-      this._meta = Meta.error;
-    }
 
-    runInAction(() => {
-      this._cartItems = cartItems;
-      this._meta = Meta.success;
-    });
+      runInAction(() => {
+        this._cartItems = cartItems;
+        this._meta = Meta.success;
+      });
+    } catch (error) {
+      runInAction(() => {
+        this._meta = Meta.error;
+      });
+    }
   }
 
   private saveCartToLocalStorage(): void {

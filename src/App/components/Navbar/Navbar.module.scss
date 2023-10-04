@@ -56,6 +56,10 @@
   display: flex;
   align-items: center;
   gap: $space-xs;
+
+  &__svg {
+    @include square($navbar-logo-size);
+  }
 }
 
 .nav {
