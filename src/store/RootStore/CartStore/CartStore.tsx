@@ -87,7 +87,6 @@ export default class CartStore implements ICartStore {
 
   setQuantity(id: number, newQuantity: number): void {
     set(this._cartItems.entities[id], "quantity", newQuantity);
-    this.saveCartToLocalStorage();
   }
 
   incQuantity(id: number): void {
@@ -96,7 +95,6 @@ export default class CartStore implements ICartStore {
       "quantity",
       this._cartItems.entities[id].quantity + 1
     );
-    this.saveCartToLocalStorage();
   }
 
   decQuantity(id: number): void {
@@ -110,7 +108,6 @@ export default class CartStore implements ICartStore {
       "quantity",
       this._cartItems.entities[id].quantity - 1
     );
-    this.saveCartToLocalStorage();
   }
 
   addToCart(product: ProductItemModel): void {
@@ -126,8 +123,6 @@ export default class CartStore implements ICartStore {
       const newItem = { quantity: 1, product };
       set(this._cartItems.entities, product.id.toString(), newItem);
     }
-
-    this.saveCartToLocalStorage();
   }
 
   buyNow(product: ProductItemModel): void {
@@ -135,7 +130,6 @@ export default class CartStore implements ICartStore {
       this._cartItems.order.push(product.id);
       const newItem = { quantity: 1, product };
       set(this._cartItems.entities, product.id.toString(), newItem);
-      this.saveCartToLocalStorage();
     }
   }
 
@@ -144,7 +138,6 @@ export default class CartStore implements ICartStore {
       (id) => id !== productId
     );
     remove(this._cartItems.entities, productId.toString());
-    this.saveCartToLocalStorage();
   }
 
   private async loadCartFromLocalStorage(): Promise<void> {
@@ -180,7 +173,7 @@ export default class CartStore implements ICartStore {
     }
   }
 
-  private saveCartToLocalStorage(): void {
+  saveCartToLocalStorage(): void {
     const cartItems: CollectionModel<number, { quantity: number }> = {
       order: this._cartItems.order,
       entities: {},
