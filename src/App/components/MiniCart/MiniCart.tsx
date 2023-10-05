@@ -17,14 +17,19 @@ export type MiniCartProps = {
 };
 const MiniCart: React.FC<MiniCartProps> = ({ pathName }) => {
   const [miniCartOpen, setMiniCartOpen] = React.useState<boolean>(false);
-  const miniCartToggler = React.useCallback(() => {
-    setMiniCartOpen((prevMiniCartOpen) => !prevMiniCartOpen);
+
+  const handleMiniCartOpen = React.useCallback(() => {
+    setMiniCartOpen(true);
+  }, []);
+
+  const handleMiniCartClose = React.useCallback(() => {
+    setTimeout(() => setMiniCartOpen(false), 500);
   }, []);
   return (
     <span
       className={styles["mini-cart"]}
-      onMouseEnter={miniCartToggler}
-      onMouseLeave={miniCartToggler}
+      onMouseEnter={handleMiniCartOpen}
+      onMouseLeave={handleMiniCartClose}
     >
       <Link
         className={cn(
