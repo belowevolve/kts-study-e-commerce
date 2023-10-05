@@ -109,8 +109,8 @@ $breakpoints: (
 @mixin mini-cart {
   padding: $space-xs;
   gap: $space-xxs;
-  grid-template-columns: minmax(20%, $cart-card-image-max-width) $cart-card-price-column 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-s auto;
+  grid-template-rows: repeat(4, auto);
   grid-template-areas:
     "image info info "
     "image price . "
