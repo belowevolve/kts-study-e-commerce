@@ -17,7 +17,8 @@ const AnimationPage: React.FC<AnimationPageProps> = ({
       className={cn(styles.page, className)}
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
-      exit={{ x: window.innerWidth, transition: { delay: 3 } }}
+      exit={{ x: window.innerWidth }}
+      transition={{ duration: 0.3 }}
     >
       {children}
     </motion.div>

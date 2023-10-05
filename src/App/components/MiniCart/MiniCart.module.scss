@@ -2,13 +2,9 @@
 @use "@mixins" as *;
 
 .mini-cart {
-  &:hover {
-    .mini-cart__container {
-      transition: max-height 0.3s ease-in;
-      max-height: $mini-cart-container-height;
-    }
+  @include mq(lg) {
+    position: relative;
   }
-
   &__total-items {
     position: absolute;
     right: $navbar-cart-total-position;
@@ -24,12 +20,16 @@
   }
 
   &__container {
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+
     position: absolute;
     top: $navbar-height;
     right: $mini-cart-right;
+    @include mq(lg) {
+      right: calc($navbar-svg-size/2);
+      top: $navbar-height - $mini-cart-top;
+      transform: translateX(50%);
+    }
 
     width: $mini-cart-width;
     margin-top: -$mini-cart-fake-padding;
