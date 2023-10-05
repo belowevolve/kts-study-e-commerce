@@ -11,8 +11,8 @@
   @include mq(sm) {
     padding: $space-s;
     gap: $space-s;
-    grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-xs 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: minmax(20%, $cart-card-image-max-width) $cart-card-price-column 1fr;
+    grid-template-rows: repeat(3, auto);
     grid-template-areas:
       "image info info "
       "image price price-per-unit "
