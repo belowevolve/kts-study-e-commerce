@@ -1,0 +1,48 @@
+@use "@variables" as *;
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: $space-xl auto;
+  &__button {
+    min-height: 0;
+    max-height: $pagination-height;
+    background: transparent;
+    color: $pagination-button;
+    transition: 0.3s ease color;
+    padding: $space-s;
+    &:hover {
+      color: $pagination-button-hover;
+      background: transparent !important;
+    }
+    &:disabled {
+      color: $pagination-button-disabled;
+    }
+  }
+
+  &__page {
+    min-height: 0;
+    max-height: $pagination-height;
+    background: transparent;
+    color: $pagination-page-text;
+    padding: $space-s;
+    &__text {
+      font-weight: 500;
+    }
+    transition: 0.3s ease color;
+    &:hover {
+      color: $pagination-page-text-hover;
+      background: transparent !important;
+    }
+
+    &_active {
+      background: $pagination-page-button-active;
+      color: $pagination-page-text-active;
+      &:hover {
+        background: $pagination-page-button-active !important;
+        color: $pagination-page-text-active;
+      }
+    }
+  }
+}

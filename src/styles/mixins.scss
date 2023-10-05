@@ -1,0 +1,119 @@
+@use "@variables" as *;
+
+$breakpoints: (
+  xs: (
+    min: $mq-xs,
+    max: $mq-xs,
+  ),
+  sm: (
+    min: $mq-sm,
+    max: $mq-sm,
+  ),
+  md: (
+    min: $mq-md,
+    max: $mq-md,
+  ),
+  lg: (
+    min: $mq-lg,
+    max: $mq-lg,
+  ),
+  xl: (
+    min: $mq-xl,
+    max: $mq-xl,
+  ),
+  xxl: (
+    min: $mq-xxl,
+    max: $mq-xxl,
+  ),
+);
+
+@mixin mq($name, $type: min) {
+  @if map-has-key($breakpoints, $name) {
+    $query: map-get($breakpoints, $name);
+
+    @if $type == min {
+      @media screen and (min-width: #{inspect(map-get($query, 'min'))}) {
+        @content;
+      }
+    } @else if $type == max {
+      @media screen and (max-width: #{inspect(map-get($query, 'max'))}) {
+        @content;
+      }
+    } @else {
+      @warn "Invalid type parameter. Please use 'min' or 'max'.";
+    }
+  } @else {
+    @warn "Unfortunately, no value could be retrieved from `breakpoints`. " + 
+            "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin page {
+  margin: $space-xl auto;
+  max-width: 1920px;
+  padding: 0 $space-s;
+  transition: 0.3s ease padding;
+  @include mq(lg) {
+    padding: 0 $navbar-padding;
+  }
+}
+@mixin items-grid {
+  margin-top: $space-l;
+  display: grid;
+  justify-content: space-between;
+  transition: grid-template-columns 0.3s ease;
+  grid-template-columns: repeat(3, minmax(0, 360px));
+  grid-row-gap: $space-l;
+  grid-column-gap: $space-xs;
+  @media (min-width: 1500px) {
+    grid-template-columns: repeat(4, minmax(0, 360px));
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 360px));
+  }
+}
+@mixin image-container {
+  position: relative;
+  background: $card-image-bg;
+
+  &::after {
+    content: "";
+    padding-top: 100%;
+    display: block;
+  }
+}
+
+@mixin image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+@mixin hover-brand {
+  transition: 0.3s ease color;
+  &:hover {
+    color: $brand;
+  }
+}
+
+@mixin mini-cart {
+  padding: $space-xs;
+  gap: $space-xxs;
+  grid-template-columns: minmax(20%, $cart-card-image-max-width) $space-s auto;
+  grid-template-rows: repeat(4, auto);
+  grid-template-areas:
+    "image info info "
+    "image price . "
+    "image . price-per-unit"
+    "trash .  button ";
+}

@@ -1,0 +1,47 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.nav {
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    padding: $space-xs;
+    position: relative;
+    @include hover-brand;
+    @include mq(lg) {
+      .link {
+        display: none;
+        background: $brand;
+        position: absolute;
+        margin-top: $navbar-height;
+        width: 100%;
+        height: $navbar-active-line-height;
+        transform: scale(0);
+        animation: expandFromCenter 0.5s ease-in-out forwards;
+        opacity: 0;
+      }
+
+      @keyframes expandFromCenter {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .active {
+        display: block;
+      }
+    }
+  }
+}
+
+.active {
+  color: $brand;
+}

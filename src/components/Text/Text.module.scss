@@ -1,0 +1,53 @@
+@use "@variables" as *;
+
+.text {
+  border-radius: $border-radius;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-weight: 400;
+}
+
+.text_view-button {
+  font-size: $font-size-button;
+  line-height: $line-height-button;
+  overflow: visible;
+}
+
+.text_view-title {
+  font-size: $font-size-title;
+  line-height: $line-height-title;
+  font-weight: 700;
+}
+
+.text_view-p-20 {
+  font-size: $font-size-p20;
+  line-height: $line-height-p20;
+}
+
+.text_view-p-18 {
+  font-size: $font-size-p18;
+  line-height: $line-height-p18;
+}
+
+.text_view-p-16 {
+  font-size: $font-size-p16;
+  line-height: $line-height-p16;
+}
+
+.text_view-p-14 {
+  font-size: $font-size-p14;
+  line-height: $line-height-p14;
+}
+
+.text_color-primary {
+  color: $text-primary;
+}
+
+.text_color-secondary {
+  color: $text-secondary;
+}
+
+.text_color-accent {
+  color: $text-accent;
+}

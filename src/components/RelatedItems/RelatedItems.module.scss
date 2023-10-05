@@ -1,0 +1,35 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.related {
+  margin-top: $space-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-s;
+  @include mq(lg) {
+    gap: $space-l;
+  }
+
+  &__text {
+    font-size: $related-font-size;
+  }
+
+  &__recs {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    overflow-x: scroll;
+    padding: $space-xs;
+    margin: -$space-xs;
+    gap: $space-s;
+    @include mq(lg) {
+      gap: $space-l;
+    }
+    &__product {
+      min-width: $related-item-max-width-s;
+      @include mq(lg) {
+        min-width: $related-item-max-width;
+      }
+    }
+  }
+}

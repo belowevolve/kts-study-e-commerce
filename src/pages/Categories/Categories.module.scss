@@ -1,0 +1,10 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.categories-page {
+  @include page;
+}
+
+.categories {
+  @include items-grid;
+}

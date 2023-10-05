@@ -1,0 +1,161 @@
+$brand: #518581;
+$brand-hover: #86aaa7;
+$brand-active: #487773;
+$brand-background: #fafafa;
+
+$mq-xs: 360px;
+$mq-sm: 544px;
+$mq-md: 768px;
+$mq-lg: 1000px;
+$mq-xl: 1200px;
+$mq-xxl: 1920px;
+
+$navbar-line: 2px solid #f3f3f3;
+$navbar-bg: #fff;
+$navbar-height: 90px;
+$navbar-padding: 100px;
+$navbar-svg-size: 30px;
+$navbar-cart-total-position: -2px;
+$navbar-cart-total-border-radius: 8px;
+$navbar-cart-total-text-padding: 0 4px;
+$navbar-active-line-height: 3px;
+$navbar-logo-size: 42px;
+$mini-cart-fake-padding: 30px;
+$mini-cart-top: 19px;
+$mini-cart-container-height: 500px;
+$mini-cart-items-height: 300px;
+$mini-cart-width: 340px;
+$mini-cart-right: calc(($mq-xs - $mini-cart-width) / 2);
+
+$label-max-width: 600px;
+$label-margin-top: 100px;
+$label-margin-top-mobile: 50px;
+
+$font-size-button: 18px;
+$line-height-button: 18px;
+$font-size-title: 44px;
+$line-height-title: 48px;
+$font-size-sub-title: 32px;
+$font-size-p20: 20px;
+$line-height-p20: 24px;
+$font-size-p18: 18px;
+$line-height-p18: 22px;
+$font-size-p16: 16px;
+$line-height-p16: 20px;
+$font-size-p14: 14px;
+$line-height-p14: 18px;
+
+$button-min-height: 52px;
+$button-primary-bg: $brand;
+$button-primary-text: #ffffff;
+$button-primary-bg-hover: #86aaa7;
+$button-primary-text-hover: #ffffff;
+$button-primary-bg-disabled: #d9d9d9;
+$button-primary-text-disabled: #ffffff;
+$button-primary-bg-active: #487773;
+$button-primary-text-active: #ffffff;
+$button-border: 1px solid #afadb5;
+$button-add-to-cart-color: white;
+$button-add-to-cart-text: black;
+$button-loader: white;
+
+$text-primary: #000000;
+$text-secondary: #afadb5;
+$text-accent: $brand;
+
+$input-text: #000000;
+$input-bg: #ffffff;
+$input-height: 52px;
+$input-placeholder: #afadb5;
+$input-border: 1px solid #ffffff;
+$input-bg-focus: #ffffff;
+$input-border-focus: 1px solid $brand;
+$input-text-focus: #000000;
+$input-bg-disabled: #ffffff;
+$input-border-disabled: #ffffff;
+$input-text-disabled: rgba(0, 0, 0, 0.2);
+
+$checkbox-size: 40px;
+$checkbox-correction: -1px;
+$checkbox-bg: #ffffff;
+$checkbox-border: 1px solid #ffffff;
+$checkbox-bg-hover: #ffffff;
+$checkbox-border-hover: $brand;
+$checkbox-bg-disabled: rgba(255, 255, 255, 0.5);
+$checkbox-border-disabled: #ffffff;
+$checkbox-check: $brand;
+$checkbox-check-hover: $brand;
+$checkbox-check-disabled: rgba(0, 0, 0, 0.2);
+
+$card-image-bg: #d9d9d9;
+$card-bg: #ffffff;
+$card-max-width: 360px;
+
+$slider-button: black;
+$slider-button-disabled: rgba(175, 173, 181, 0.2);
+$slider-button-color: white;
+$slider-button-size: 60px;
+$slider-bullet-border: 1px solid $brand;
+$slider-size: 600px;
+$slider-correction: -1px;
+
+$space-xl: 48px;
+$space-l: 32px;
+$space-m: 24px;
+$space-s: 16px;
+$space-xs: 12px;
+$space-xxs: 8px;
+$space-back: 60px;
+
+$loader-bg: $brand;
+$loader-l: 40px;
+$loader-l-margin: 10px;
+$loader-l-border: 5px;
+$loader-m: 32px;
+$loader-m-margin: 8px;
+$loader-m-border: 4px;
+$loader-s: 16px;
+$loader-s-margin: 4px;
+$loader-s-border: 2px;
+
+$dropdown-options-bg: #ffffff;
+$dropdown-options-rows: 3;
+$dropdown-options-padding: $space-s;
+$dropdown-min-width: 300px;
+$pagination-button: rgba(21, 20, 17, 1);
+$pagination-height: 42px;
+$pagination-button-hover: $brand;
+$pagination-button-disabled: rgba(175, 173, 181, 1);
+$pagination-page-padding: 10px;
+$pagination-page-text: $text-primary;
+$pagination-page-text-weight: 500;
+$pagination-page-text-active: white;
+$pagination-page-text-hover: $brand;
+$pagination-page-button-active: $brand;
+
+$shadow-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+$shadow-nav: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+
+$icon-primary: #000000;
+$icon-secondary: #afadb5;
+$icon-accent: $brand;
+
+$cart-card-line: 2px solid $card-image-bg;
+$cart-card-image-max-width: 150px;
+$cart-card-price-column: 80px;
+$cart-card-skeleton-button-width: 130px;
+$stepper-input-border: 1px solid $card-image-bg;
+
+$add-to-cart-width: $button-min-height;
+
+$border-radius: 0px;
+$svg-size: 30px;
+
+$related-font-size: 32px;
+$related-item-max-width: $card-max-width;
+$related-item-max-width-s: 250px;
+
+$products-total-font-size: 32px;
+
+$about-logo-size: 360px;
+$about-main-max-width: 1160px;

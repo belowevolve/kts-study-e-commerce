@@ -1,0 +1,89 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.product {
+  width: 100%;
+  margin-top: $space-l;
+  display: flex;
+  gap: $space-xl;
+  @include mq(lg, max) {
+    flex-direction: column;
+    & > &__slider,
+    &__info,
+    .skeleton__slider,
+    .skeleton__info {
+      min-width: 100%;
+      min-height: 100%;
+      max-height: unset;
+    }
+  }
+  &__slider {
+    align-self: center;
+    flex: 1;
+    margin-right: $slider-correction;
+    max-width: $slider-size;
+    max-height: $slider-size;
+  }
+
+  &__info {
+    flex: 1;
+    max-width: $label-max-width;
+  }
+
+  &__label {
+    text-align: start;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__price {
+    margin-top: $space-xl + $space-l;
+  }
+
+  &__buy {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-xl * 2;
+    margin-top: $space-xl;
+    &__add-to-cart {
+      border: $button-border;
+      background-color: $button-add-to-cart-color;
+      color: $button-add-to-cart-text;
+
+      transition:
+        0.3s ease color,
+        background-color;
+      &:hover:enabled {
+        background-color: $brand-hover;
+        color: $button-primary-text;
+      }
+
+      &:active:enabled {
+        background-color: $brand-active;
+        color: $button-primary-text;
+      }
+    }
+  }
+}
+
+.skeleton {
+  &__slider {
+    width: 50%;
+    height: 50%;
+    max-width: $slider-size;
+    max-height: $slider-size;
+    @include image-container;
+
+    &__img {
+      @include image;
+    }
+  }
+
+  &__button {
+    height: $button-min-height;
+  }
+
+  &__flex-1 {
+    flex: 1;
+  }
+}

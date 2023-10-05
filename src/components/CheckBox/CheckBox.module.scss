@@ -1,0 +1,48 @@
+@use "@variables" as *;
+
+.checkbox-wrapper {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  background-color: $checkbox-bg;
+  border: $checkbox-border;
+  width: $checkbox-size;
+  height: $checkbox-size;
+
+  transition: border-color 0.2s ease;
+  &:hover {
+    background-color: $checkbox-bg-hover;
+    border-color: $checkbox-border-hover;
+    & .checkbox:checked ~ .checkbox__mark {
+      color: $checkbox-check-hover;
+    }
+  }
+
+  &_disabled {
+    background-color: $checkbox-bg-disabled;
+    border-color: $checkbox-border-disabled;
+    pointer-events: none;
+
+    & .checkbox:checked ~ .checkbox__mark {
+      color: $checkbox-check-disabled;
+    }
+  }
+}
+
+.checkbox__mark {
+  position: absolute;
+  top: $checkbox-correction;
+  left: $checkbox-correction;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.checkbox {
+  appearance: none;
+  outline: none;
+  border: none;
+  background: none;
+  &:checked ~ .checkbox__mark {
+    color: $checkbox-check;
+  }
+}

@@ -1,0 +1,20 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.cart-page {
+  @include page;
+}
+
+.cart {
+  padding-top: $space-xl;
+  @include mq(lg) {
+    display: grid;
+    grid-template-columns: auto 30%;
+    gap: $space-l;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+  }
+}

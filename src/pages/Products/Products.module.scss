@@ -1,0 +1,40 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.products-page {
+  @include page;
+}
+
+.search-container {
+  padding-top: $space-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-m;
+
+  .find {
+    width: 100%;
+    display: flex;
+    gap: $space-m;
+    .cross {
+      color: $text-secondary;
+    }
+  }
+  .multi-dropdown {
+    transition: 0.3s ease width;
+  }
+}
+
+.total {
+  margin-top: $space-xl;
+  display: flex;
+  align-items: center;
+  gap: $space-m;
+  &__text {
+    font-size: $products-total-font-size;
+  }
+}
+
+.products {
+  @include items-grid;
+}

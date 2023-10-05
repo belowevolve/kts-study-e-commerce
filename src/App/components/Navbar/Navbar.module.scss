@@ -1,0 +1,90 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.navbar {
+  height: $navbar-height;
+  background: $navbar-bg;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+
+  &__content {
+    max-width: $mq-xxl;
+    height: 100%;
+    margin: 0 auto;
+
+    padding: 0 $space-s;
+    transition: 0.3s ease padding;
+    @include mq(lg) {
+      padding: 0 $navbar-padding;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: $navbar-line;
+  }
+
+  &__toggler {
+    cursor: pointer;
+    background-color: $navbar-bg;
+    border: 0;
+    padding: 0;
+    @include mq(lg) {
+      display: none;
+    }
+    &__svg {
+      font-size: $navbar-svg-size;
+      @include hover-brand;
+    }
+  }
+
+  &__user-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: $space-s;
+
+    @include mq(lg) {
+      gap: $space-xl;
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+
+  &__svg {
+    @include square($navbar-logo-size);
+  }
+}
+
+.nav {
+  width: 40%;
+  position: fixed;
+  top: $navbar-height;
+  right: -100%;
+  background: rgba($navbar-bg, 0.8);
+  text-align: center;
+  box-shadow: $shadow-box-shadow;
+  white-space: nowrap;
+  gap: $space-xl;
+  transition: 0.2s ease-in-out right;
+
+  &--open {
+    right: 0;
+  }
+
+  @include mq(lg) {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: initial;
+    width: auto;
+    padding: 0;
+    box-shadow: none;
+  }
+}

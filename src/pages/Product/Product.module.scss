@@ -1,0 +1,17 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.product-page {
+  @include page;
+  margin: calc($space-back/2) auto;
+  @include mq(lg) {
+    margin: $space-back auto;
+  }
+}
+
+.back {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+}

@@ -1,0 +1,104 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.cart-card {
+  width: 100%;
+
+  display: grid;
+
+  @include mini-cart;
+
+  @include mq(sm) {
+    padding: $space-s;
+    gap: $space-s;
+    grid-template-columns: minmax(20%, $cart-card-image-max-width) $cart-card-price-column 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas:
+      "image info info "
+      "image price price-per-unit "
+      "trash .  button ";
+  }
+
+  @include mq(xl) {
+    padding: $space-m;
+    gap: $space-m;
+    grid-template-columns: max(20%, $cart-card-image-max-width) 2fr $cart-card-price-column 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "image info price button"
+      "image info price price-per-unit"
+      "image info price trash";
+  }
+
+  background: $card-bg;
+  border-radius: $border-radius;
+  border-top: $cart-card-line;
+  transition: box-shadow 0.2s ease-in-out;
+  &:hover {
+    box-shadow: $shadow-box-shadow;
+  }
+}
+
+.product {
+  &__image-container {
+    cursor: pointer;
+    grid-area: image;
+    align-self: center;
+    @include image-container;
+  }
+
+  &__image {
+    @include image;
+  }
+
+  &__info {
+    cursor: pointer;
+    grid-area: info;
+    padding-right: $space-m;
+    &__description {
+      padding-top: $space-s;
+    }
+  }
+}
+
+.price {
+  grid-area: price;
+  &_text {
+    overflow: visible;
+  }
+}
+
+.button {
+  grid-area: button;
+  justify-self: end;
+}
+
+.price-per-unit {
+  align-self: center;
+  justify-self: end;
+  @include mq(xl) {
+    align-self: start;
+  }
+  grid-area: price-per-unit;
+}
+
+.trash {
+  cursor: pointer;
+  grid-area: trash;
+  justify-self: start;
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  @include mq(xl) {
+    justify-self: end;
+  }
+  &-icon {
+    @include hover-brand;
+  }
+}
+
+.skeleton__button {
+  width: $cart-card-skeleton-button-width;
+  height: $button-min-height;
+}

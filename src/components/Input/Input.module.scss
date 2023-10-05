@@ -1,0 +1,29 @@
+@use "@variables" as *;
+
+.input-container {
+  display: flex;
+  width: 100%;
+  height: $input-height;
+  align-items: center;
+
+  padding: $space-s $space-xs;
+  gap: $space-xxs;
+
+  border-radius: $border-radius;
+  border: $input-border;
+  background: $input-bg;
+}
+
+.input-field {
+  border-radius: $border-radius;
+  border: $input-border;
+  outline: 0;
+  width: 100%;
+}
+
+.input-field:disabled {
+  background: $input-bg-disabled;
+}
+.input-container:focus-within {
+  border: $input-border-focus;
+}

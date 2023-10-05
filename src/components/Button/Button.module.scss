@@ -1,0 +1,40 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.button {
+  padding: $space-s;
+  min-height: $button-min-height;
+  border: 0;
+  background: $brand;
+  white-space: nowrap;
+  color: $button-primary-text;
+  cursor: pointer;
+  transition:
+    padding 0.3s ease,
+    background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include mq(sm) {
+    padding: $space-s $space-l;
+  }
+
+  &:hover:enabled {
+    background-color: $brand-hover;
+  }
+
+  &:active:enabled {
+    background: $brand-active;
+  }
+  &:disabled {
+    pointer-events: none;
+  }
+  &_disabled {
+    background: $button-primary-bg-disabled;
+  }
+
+  &__loader {
+    border-color: $button-loader;
+    border-right-color: transparent;
+  }
+}

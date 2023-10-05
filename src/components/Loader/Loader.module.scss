@@ -1,0 +1,39 @@
+@use "@variables" as *;
+
+.loader_size_l {
+  width: $loader-l;
+  height: $loader-l;
+  margin: $loader-l-margin;
+  border: $loader-l-border solid $brand;
+}
+
+.loader_size_m {
+  width: $loader-m;
+  height: $loader-m;
+  margin: $loader-m-margin;
+  border: $loader-m-border solid $brand;
+}
+
+.loader_size_s {
+  width: $loader-s;
+  height: $loader-s;
+  margin: $loader-s-margin;
+  border: $loader-s-border solid $brand;
+}
+
+.loader {
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  transform: rotate(35deg);
+  animation: rotation 1s linear infinite;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

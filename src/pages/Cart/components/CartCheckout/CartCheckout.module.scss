@@ -1,0 +1,33 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.cart {
+  &__checkout {
+    margin-top: $space-l;
+    bottom: 0;
+    position: sticky;
+    z-index: 100;
+    @include mq(lg) {
+      margin-top: 0;
+      top: $navbar-height + $space-xl;
+    }
+
+    background: $card-bg;
+    border: $cart-card-line;
+    height: max-content;
+
+    &__total {
+      margin: $space-m;
+      display: flex;
+      gap: $space-xs;
+    }
+
+    &__button {
+      display: block;
+      margin: $space-m;
+      &-btn {
+        width: 100%;
+      }
+    }
+  }
+}

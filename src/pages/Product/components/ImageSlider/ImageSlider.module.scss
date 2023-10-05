@@ -1,0 +1,40 @@
+@use "@variables" as *;
+
+.slider {
+  &__left {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 100;
+    width: $slider-button-size;
+    height: $slider-button-size;
+    border-radius: 50%;
+    border: 0;
+    background-color: $slider-button;
+    margin: 0 $space-m;
+    color: $slider-button-color;
+
+    &:disabled {
+      background-color: $slider-button-disabled;
+    }
+  }
+
+  &__right {
+    @extend .slider__left;
+    right: 0;
+  }
+
+  &__bullet {
+    &:hover {
+      background: $brand !important;
+      border: $slider-bullet-border !important;
+    }
+  }
+
+  &__image {
+    & > img {
+      aspect-ratio: 1/1;
+    }
+  }
+}

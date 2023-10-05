@@ -1,0 +1,41 @@
+@use "@variables" as *;
+@import "styles/Roboto/fonts";
+
+html,
+body {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+  background-color: $brand-background;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+pre {
+  margin: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

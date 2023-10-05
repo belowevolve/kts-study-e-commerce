@@ -1,0 +1,23 @@
+@use "@variables" as *;
+@use "@mixins" as *;
+
+.stepper {
+  display: flex;
+  height: $button-min-height;
+  gap: $space-xs;
+
+  &__button {
+    padding: 0;
+    width: calc($add-to-cart-width / 2);
+    transition: width 0.3s ease;
+    @include mq(sm) {
+      width: $add-to-cart-width;
+    }
+  }
+
+  &__input {
+    width: $add-to-cart-width;
+    padding: $space-s auto;
+    border: $stepper-input-border;
+  }
+}
