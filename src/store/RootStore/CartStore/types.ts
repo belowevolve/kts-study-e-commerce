@@ -13,4 +13,5 @@ export interface ICartStore {
   addToCart(product: ProductItemModel): void;
   buyNow(product: ProductItemModel): void;
   removeFromCart(productId: number): void;
+  saveCartToLocalStorage(): void;
 }
