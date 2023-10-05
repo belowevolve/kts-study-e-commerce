@@ -76,7 +76,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
           />
           <Button
             className={styles.stepper__button}
-            disabled={quantity >= 99 && inCart}
+            disabled={quantity >= 99}
             onClick={() => rootStore.cartStore.incQuantity(id)}
           >
             +
